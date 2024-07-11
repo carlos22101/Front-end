@@ -14,8 +14,8 @@ const CardM = ({ item, onDelete }) => {
       text: "¡No podrás revertir esto!",
       icon: 'warning',
       showCancelButton: true,
-      confirmButtonColor: '#d33',
-      cancelButtonColor: '#3085d6',
+      confirmButtonColor: '#66FF66',
+      cancelButtonColor: '#FF0000',
       confirmButtonText: 'Sí, borrar',
       cancelButtonText: 'Cancelar'
     }).then((result) => {

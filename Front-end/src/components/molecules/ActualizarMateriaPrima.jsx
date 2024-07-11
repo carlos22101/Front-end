@@ -85,8 +85,8 @@ function ActualizarMateriaPrima() {
               />
             </div>
             <div className="flex space-x-4">
-              <ButtonM type="submit" className="bg-blue-500 text-white">Confirmar</ButtonM>
-              <ButtonM type="button" className="bg-gray-500 text-white" onClick={handleCancel}>Cancelar</ButtonM>
+              <ButtonM type="submit" className="bg-[#66FF66] text-white">Confirmar</ButtonM>
+              <ButtonM type="button" className="bg-[#FF0000] text-white" onClick={handleCancel}>Cancelar</ButtonM>
             </div>
           </form>
         </div>

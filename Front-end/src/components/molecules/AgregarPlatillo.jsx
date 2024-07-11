@@ -20,7 +20,7 @@ const AgregarPlatillo = () => {
         text: 'Por favor, llene todos los campos',
         icon: 'error',
         confirmButtonText: 'Aceptar',
-        confirmButtonColor: '#EF4444',
+        confirmButtonColor: '#FF0000',
       });
       return;
     }
@@ -58,7 +58,7 @@ const AgregarPlatillo = () => {
           text: 'No se pudo agregar el platillo',
           icon: 'error',
           confirmButtonText: 'Aceptar',
-          confirmButtonColor: '#EF4444',
+          confirmButtonColor: '#FF0000',
         });
       }
     } catch (error) {
@@ -68,7 +68,7 @@ const AgregarPlatillo = () => {
         text: 'Error en la solicitud',
         icon: 'error',
         confirmButtonText: 'Aceptar',
-        confirmButtonColor: '#EF4444',
+        confirmButtonColor: '#FF0000',
       });
     }
   };
@@ -146,14 +146,14 @@ const AgregarPlatillo = () => {
           <div className="flex justify-between mt-6">
             <button
               type="button"
-              className="bg-red-500 text-white py-2 px-4 rounded hover:bg-red-700"
+              className="bg-[#FF0000] text-white py-2 px-4 rounded hover:bg-[#FF0000]"
               onClick={() => navigate('/menu')}
             >
               Cancelar
             </button>
             <button
               type="submit"
-              className="bg-green-500 text-white py-2 px-4 rounded hover:bg-green-700"
+              className="bg-[#66FF66] text-white py-2 px-4 rounded hover:bg-[#66FF66]"
             >
               Agregar
             </button>

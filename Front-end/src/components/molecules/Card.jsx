@@ -17,8 +17,8 @@ const Card = ({ id, nombre, descripcion, precio, Categoria, onDelete }) => {
       text: "No podrás revertir esta acción",
       icon: 'warning',
       showCancelButton: true,
-      confirmButtonColor: '#29ce39',
-      cancelButtonColor: '#d33',
+      confirmButtonColor: '#66FF66',
+      cancelButtonColor: '#ff0000',
       confirmButtonText: 'Sí, eliminarlo',
       cancelButtonText: 'No, cancelar',
     }).then((result) => {

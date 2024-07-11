@@ -10,7 +10,7 @@ const SearchBarP = ({ searchValue, onSearchChange, onSearch }) => {
   };
 
   return (
-    <div className="flex items-center bg-orange-500 p-4">
+    <div className="flex items-center bg-[#CCCCCC] p-4">
       <InputP
         value={searchValue}
         onChange={onSearchChange}

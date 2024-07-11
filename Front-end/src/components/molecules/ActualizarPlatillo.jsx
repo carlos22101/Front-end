@@ -34,7 +34,7 @@ const ActualizarPlatillo = () => {
         text: 'Por favor, llene todos los campos',
         icon: 'error',
         confirmButtonText: 'Aceptar',
-        confirmButtonColor: '#EF4444',
+        confirmButtonColor: '#FF0000',
       });
       return;
     }
@@ -58,7 +58,7 @@ const ActualizarPlatillo = () => {
             text: 'Platillo actualizado correctamente',
             icon: 'success',
             confirmButtonText: 'Aceptar',
-            confirmButtonColor: '#10B981',
+            confirmButtonColor: '#66FF66',
           }).then(() => {
             navigate('/menu');
           });
@@ -68,7 +68,7 @@ const ActualizarPlatillo = () => {
             text: 'No se pudo actualizar el platillo',
             icon: 'error',
             confirmButtonText: 'Aceptar',
-            confirmButtonColor: '#EF4444',
+            confirmButtonColor: '#FF0000',
           });
         }
       })
@@ -78,7 +78,7 @@ const ActualizarPlatillo = () => {
           text: 'Error en la solicitud',
           icon: 'error',
           confirmButtonText: 'Aceptar',
-          confirmButtonColor: '#EF4444',
+          confirmButtonColor: '#FF0000',
         });
       });
   };
@@ -87,7 +87,7 @@ const ActualizarPlatillo = () => {
     <>
     <Header/>
       <div className="flex flex-col items-center justify-center min-h-screen bg-gray-100">
-        <form onSubmit={handleSubmit} className="bg-white p-8 rounded shadow-md w-full max-w-4xl">
+        <form onSubmit={handleSubmit} className="bg-[#FFFFFF] p-8 rounded shadow-md w-full max-w-4xl">
           <div className="grid grid-cols-1 gap-6">
             <div className="mb-4">
               <label htmlFor="nombre" className="block font-medium text-gray-700">
@@ -145,10 +145,10 @@ const ActualizarPlatillo = () => {
             </div>
           </div>
           <div className="flex justify-between mt-6">
-            <button type="button" className="bg-red-500 text-white py-2 px-4 rounded hover:bg-red-700" onClick={() => navigate('/menu')}>
+            <button type="button" className="bg-[#FF0000] text-white py-2 px-4 rounded hover:bg-red-700" onClick={() => navigate('/menu')}>
               Cancelar
             </button>
-            <button type="submit" className="bg-green-500 text-white py-2 px-4 rounded hover:bg-green-700">
+            <button type="submit" className="bg-[#66FF66] text-white py-2 px-4 rounded hover:bg-green-700">
               Actualizar
             </button>
           </div>

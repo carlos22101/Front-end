@@ -24,7 +24,7 @@ function Header() {
 
   return (
     <>
-      <header className="bg-orange-600 flex items-center h-20 w-full">
+      <header className="bg-[#FF6600] flex items-center h-20 w-full">
         <div className="flex items-center ml-4 ">
           <img src="/Logo.png" alt="Logo" className="w-16" />
           <div className="flex items-center ml-px mr-4">

@@ -82,7 +82,7 @@ const AgregarProveedor = () => {
           <ButtonP type="submit" className="bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded">
             Aceptar y Agregar
           </ButtonP>
-          <ButtonP type="button" onClick={handleCancel} className="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded">
+          <ButtonP type="button" onClick={handleCancel} className="bg-[#FF0000] hover:bg-red-700 text-white font-bold py-2 px-4 rounded">
             Cancelar
           </ButtonP>
         </div>

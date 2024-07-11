@@ -122,7 +122,7 @@ const ActualizarProveedor = () => {
           <button type="button" onClick={handleConfirmar} className="bg-green-500 text-white px-4 py-2 mr-2">
             Confirmar
           </button>
-          <button type="button" onClick={handleCancelar} className="bg-gray-400 text-white px-4 py-2">
+          <button type="button" onClick={handleCancelar} className="bg-[#FF0000] text-white px-4 py-2">
             Cancelar
           </button>
         </div>
