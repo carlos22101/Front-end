@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 
 function Sidebar(){
 return(
-    <div className='w-40 h-screen border-solid bg-gray-800'>
+    <div className='w-40 h-screen border-solid bg-[#cccccc]'>
         <ButtonHome/>
         <ul className='pl-4'>
             <li className='mb-4'>

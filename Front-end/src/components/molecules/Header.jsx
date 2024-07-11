@@ -24,14 +24,17 @@ function Header() {
 
   return (
     <>
-      <header className="bg-orange-600 flex items-center h-20">
-        <div className="flex items-center ml-4">
+      <header className="bg-orange-600 flex items-center h-20 w-full">
+        <div className="flex items-center ml-4 ">
           <img src="/Logo.png" alt="Logo" className="w-16" />
-          <div className="flex items-center ml-auto mr-4">
+          <div className="flex items-center ml-px mr-4">
           LA TEHUANITA
-        </div>
-          <div className="text-white text-2xl font-bold ml-4">
+          </div>
+          <div className="text-white text-2xl font-bold ml-[400px]">
             {getPageTitle()}
+          </div>
+          <div className='flex '>
+            <button> <img src="./Proveedor.png" alt=""  className='w-10 h-10 ml-[500px]'/></button>
           </div>
         </div>
       </header>
