@@ -35,7 +35,7 @@ const App = () => {
         <Route path='/AgregarMateriaPrima' element={<AgregarMateriaPrima/>}/>
         <Route path='/ActualizarMateriaPrima/:id' element={<ActualizarMateriaPrima/>}/>
         <Route path='/agregar-proveedor' element={<AgregarProveedor/>}/>
-        <Route path='/actualizar-proveedor/:ID' element={<ActualizarProveedor/>}/>
+        <Route path='/actualizar-proveedor/:ID_Proveedor' element={<ActualizarProveedor/>}/>
       </Routes>
     </Router>
   );

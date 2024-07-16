@@ -18,9 +18,12 @@ const SearchBarM = ({ onSearch }) => {
   };
 
   return (
-    <div className="flex items-center space-x-4">
+    <div className="flex justify-between items-center p-4 bg-gray-100">
+      <h1 className="text-3xl font-bold">MATERIA PRIMA</h1>
+      <div className="flex items-center space-x-2">
       <SearchInput value={searchTerm} onChange={handleSearchChange} placeholder="Search" />
       <Button onClick={handleAdd} className="bg-green-500 text-white">Agregar</Button>
+    </div>
     </div>
   );
 };

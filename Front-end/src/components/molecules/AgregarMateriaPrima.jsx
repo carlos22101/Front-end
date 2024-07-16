@@ -11,6 +11,7 @@ function AgregarMateriaPrima() {
   const [cantidad, setCantidad] = useState('');
   const navigate = useNavigate();
 
+
   const handleSubmit = (event) => {
     event.preventDefault();
     fetch('https://restauranteapi.integrador.xyz/api/Materia_Prima', {
@@ -38,14 +39,16 @@ function AgregarMateriaPrima() {
       console.error('Error:', error);
     });
   };
+  const handleCancel = () => {
+    navigate('/MateriaPrima')
+  }
 
   return (
     <>
       <Header />
-      <div className="flex">
-        <div className="flex-1 p-8">
+        <div className="flex flex-col items-center justify-center min-h-screen bg-gray-100">
           <h1 className="text-2xl font-bold mb-4">Agregar Materia Prima</h1>
-          <form onSubmit={handleSubmit} className="space-y-4">
+          <form onSubmit={handleSubmit} className="bg-white p-8 rounded shadow-md w-full max-w-4xl">
             <div>
               <CustomText className="block mb-2">Nombre:</CustomText>
               <InputM 
@@ -64,10 +67,12 @@ function AgregarMateriaPrima() {
                 required 
               />
             </div>
-            <ButtonM type="submit" >Agregar</ButtonM>
+            <div><ButtonM type="button" onClick={handleCancel} style="bg-red-600 hover:bg-red-700 text-white font-bold py-2 px-4 rounded">
+            Cancelar
+          </ButtonM ></div>
+            <ButtonM style='bg-green-600 hover:bg-green-700 text-white font-bold py-2 px-4 rounded' type="submit">Agregar</ButtonM>
           </form>
         </div>
-      </div>
     </>
   );
 }

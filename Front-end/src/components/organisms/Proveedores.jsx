@@ -20,13 +20,17 @@ function Proveedores() {
       <Header />
       <div className="flex">
         <Sidebar />
-        <div className="flex-grow">
+        <div className="flex flex-col w-full overflow-x-hidden">
+          <div>
           <SearchBarP
             searchValue={searchValue}
             onSearchChange={handleSearchChange}
             onSearch={handleSearch}
           />
+          </div>
+          <div className="p-4 overflow-y-auto max-h-[520px] border border-gray-300 ">
           <CardContainerP searchValue={searchValue} />
+          </div>
         </div>
       </div>
     </>

@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import Sidebar from "../molecules/Sidebar";
 import Header from "../molecules/Header";
 import SearchBar from '../molecules/SearchBar';
-import VentaList from '../molecules/VentaList';
+
 
 function Ventas() {
     const [searchTerm, setSearchTerm] = useState('');

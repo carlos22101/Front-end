@@ -2,51 +2,27 @@ import React from 'react';
 import Swal from 'sweetalert2';
 import { useNavigate } from 'react-router-dom';
 
-const CardP = ({ ID, Nombre, Contacto, Informacion, onDelete, onUpdate }) => {
+const CardP = ({ ID_Proveedor, Nombre, Contacto, Informacion, onDelete, onUpdate }) => {
   const navigate = useNavigate();
 
   const handleDelete = () => {
     Swal.fire({
       title: '¿Está seguro?',
-      text: "¡No podrás revertir esto!",
+      text: '¡No podrás revertir esto!',
       icon: 'warning',
       showCancelButton: true,
       confirmButtonText: 'Sí, eliminar',
       cancelButtonText: 'Cancelar'
     }).then((result) => {
       if (result.isConfirmed) {
-        fetch(`https://restauranteapi.integrador.xyz/api/Proveedores/${ID}`, {
-          method: 'DELETE',
-        })
-          .then((response) => {
-            if (response.ok) {
-              onDelete(ID); 
-              Swal.fire({
-                title: 'Eliminado',
-                text: 'El proveedor ha sido eliminado correctamente',
-                icon: 'success',
-                confirmButtonText: 'Aceptar'
-              });
-            } else {
-              throw new Error('Error al eliminar el proveedor');
-            }
-          })
-          .catch((error) => {
-            console.error('Error eliminando proveedor:', error);
-            Swal.fire({
-              title: 'Error',
-              text: 'Hubo un error al eliminar el proveedor',
-              icon: 'error',
-              confirmButtonText: 'Aceptar'
-            });
-          });
+        onDelete();
       }
     });
   };
 
   const handleUpdate = () => {
-    onUpdate(ID); 
-    navigate(`/actualizar-proveedor/${ID}`); 
+    onUpdate();
+    navigate(`/actualizar-proveedor/${ID_Proveedor}`);
   };
 
   return (
@@ -60,16 +36,10 @@ const CardP = ({ ID, Nombre, Contacto, Informacion, onDelete, onUpdate }) => {
       </div>
       <p className="text-gray-700 mb-4">{Informacion}</p>
       <div className="flex justify-between">
-        <button
-          onClick={handleUpdate}
-          className="text-blue-500 hover:text-blue-700"
-        >
+        <button onClick={handleUpdate} className="text-white-500 hover:text-blue-700">
           Actualizar
         </button>
-        <button
-          onClick={handleDelete}
-          className="text-red-500 hover:text-red-700"
-        >
+        <button onClick={handleDelete} className="text-red-500 hover:text-red-700">
           Eliminar
         </button>
       </div>

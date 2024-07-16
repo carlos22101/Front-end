@@ -1,8 +1,10 @@
 import React from 'react';
 import { useLocation } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 
 function Header() {
   const location = useLocation();
+  const navigate = useNavigate();
 
   const getPageTitle = () => {
     switch (location.pathname) {
@@ -14,6 +16,8 @@ function Header() {
         return 'Agregar Platillo';
       case '/MateriaPrima':
         return 'Materia Prima';
+        case '/Proveedores':
+        return 'Proveedores';
       default:
         if (location.pathname.startsWith('/Actualizar/')) {
           return 'Actualizar';
@@ -34,7 +38,9 @@ function Header() {
             {getPageTitle()}
           </div>
           <div className='flex '>
-            <button> <img src="./Proveedor.png" alt=""  className='w-10 h-10 ml-[500px]'/></button>
+            <button> <img src="./Proveedor.png" alt=""  className='w-10 h-10 ml-[500px]'
+            onClick={()=> navigate("/")}
+            /></button>
           </div>
         </div>
       </header>

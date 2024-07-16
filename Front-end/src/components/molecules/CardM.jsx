@@ -57,8 +57,8 @@ const CardM = ({ item, onDelete }) => {
       <CustomText>En el inventario existen</CustomText>
       <CustomText className="font-semibold">{item.Cantidad} unidades</CustomText>
       <div className="flex justify-between mt-4">
-        <ButtonM className="bg-blue-500 text-white" onClick={handleUpdate}>Actualizar</ButtonM>
-        <ButtonM className="bg-red-500 text-white" onClick={handleDelete}>Eliminar</ButtonM>
+        <ButtonM onClick={handleUpdate} style='bg-green-600 hover:bg-green-700 text-white font-bold py-2 px-4 rounded'>Actualizar</ButtonM>
+        <ButtonM onClick={handleDelete} style='bg-red-600 hover:bg-red-700 text-white font-bold py-2 px-4 rounded'>Eliminar</ButtonM>
       </div>
     </div>
   );

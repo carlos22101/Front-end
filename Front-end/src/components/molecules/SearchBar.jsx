@@ -18,7 +18,3 @@ const SearchBar = ({ setSearch }) => {
 };
 
 export default SearchBar;
-
-
-
-

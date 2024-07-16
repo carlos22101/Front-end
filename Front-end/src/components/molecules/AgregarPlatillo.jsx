@@ -34,7 +34,7 @@ const AgregarPlatillo = () => {
         body: JSON.stringify({
           Nombre,
           Descripcion,
-          Precio,
+          Precio:parseFloat(Precio),
           Categoria,
         }),
       });
@@ -74,7 +74,7 @@ const AgregarPlatillo = () => {
   };
 
   return (
-    <>
+<>
       <Header />
       <div className="flex flex-col items-center justify-center min-h-screen bg-gray-100">
         <form onSubmit={handleSubmit} className="bg-white p-8 rounded shadow-md w-full max-w-4xl">
@@ -119,41 +119,32 @@ const AgregarPlatillo = () => {
             <div className="mb-4">
               <label className="block font-medium text-gray-700">Categoría</label>
               <div className="flex space-x-4">
-                <button
-                  type="button"
-                  className={`py-2 px-4 rounded ${Categoria === 'Desayunos' ? 'bg-green-500 text-white' : 'bg-gray-200 text-gray-700'}`}
-                  onClick={() => setCategoria('Desayunos')}
-                >
-                  Desayunos
-                </button>
-                <button
-                  type="button"
-                  className={`py-2 px-4 rounded ${Categoria === 'Comidas' ? 'bg-green-500 text-white' : 'bg-gray-200 text-gray-700'}`}
-                  onClick={() => setCategoria('Comidas')}
-                >
-                  Comidas
-                </button>
-                <button
-                  type="button"
-                  className={`py-2 px-4 rounded ${Categoria === 'Cenas' ? 'bg-green-500 text-white' : 'bg-gray-200 text-gray-700'}`}
-                  onClick={() => setCategoria('Cenas')}
-                >
-                  Cenas
-                </button>
+                {['Desayunos', 'Comidas', 'Cenas', 'Bebidas'].map((cat) => (
+                  <button
+                    key={cat}
+                    type="button"
+                    className={`py-2 px-4 rounded ${
+                      Categoria === cat ? 'bg-green-500 text-white' : 'bg-gray-200 text-gray-700'
+                    }`}
+                    onClick={() => setCategoria(cat)}
+                  >
+                    {cat}
+                  </button>
+                ))}
               </div>
             </div>
           </div>
           <div className="flex justify-between mt-6">
             <button
               type="button"
-              className="bg-[#FF0000] text-white py-2 px-4 rounded hover:bg-[#FF0000]"
+              className="bg-red-500 text-white py-2 px-4 rounded hover:bg-red-700"
               onClick={() => navigate('/menu')}
             >
               Cancelar
             </button>
             <button
               type="submit"
-              className="bg-[#66FF66] text-white py-2 px-4 rounded hover:bg-[#66FF66]"
+              className="bg-green-500 text-white py-2 px-4 rounded hover:bg-green-700"
             >
               Agregar
             </button>
@@ -163,6 +154,4 @@ const AgregarPlatillo = () => {
     </>
   );
 };
-
 export default AgregarPlatillo;
-

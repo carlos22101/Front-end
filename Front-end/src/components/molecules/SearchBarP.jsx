@@ -10,7 +10,9 @@ const SearchBarP = ({ searchValue, onSearchChange, onSearch }) => {
   };
 
   return (
-    <div className="flex items-center bg-[#CCCCCC] p-4">
+    <div className="flex justify-between items-center p-4 bg-gray-100">
+    <h1 className="text-3xl font-bold">PROVEEDORES</h1>
+    <div className="flex items-center space-x-2">
       <InputP
         value={searchValue}
         onChange={onSearchChange}
@@ -20,6 +22,7 @@ const SearchBarP = ({ searchValue, onSearchChange, onSearch }) => {
       <ButtonP onClick={handleAddClick} className="flex-shrink-0 ml-4">
         Agregar
       </ButtonP>
+    </div>
     </div>
   );
 };

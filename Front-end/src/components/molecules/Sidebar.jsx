@@ -10,7 +10,7 @@ return(
                 <Link to="/Menu"> Platillo</Link>
             </li>
             <li className='mb-4'>
-                <Link to="/MateriaPrima">Matria Prima</Link>
+                <Link to="/MateriaPrima">Materia Prima</Link>
             </li>
             <li className='mb-4'>
                 <Link to="/Usuario">Usuarios</Link>

@@ -60,10 +60,10 @@ const Card = ({ id, nombre, descripcion, precio, Categoria, onDelete }) => {
 
   return (
     <div className="border rounded-lg overflow-hidden shadow-lg m-2 w-64">
-      <div className='border-2 border-solid border-black h-10'>
+      <div className='border-2 border-solid border-black h-10 '>
         <img src="" alt="" />
       </div>
-      <div className='pl-56 relative inline-block'>
+      <div className='pl-56 relative inline-block '>
         <Button onClick={handlerClick}>
           •••
         </Button>
@@ -75,7 +75,7 @@ const Card = ({ id, nombre, descripcion, precio, Categoria, onDelete }) => {
           </div>
         )}
       </div>
-      <div className="pl-4 pb-4 pr-4">
+      <div className="pl-4 pb-4 pr-4 bg-[#cccccc]">
         <h3 className="font-bold text-lg">{nombre}</h3>
         <p className="text-gray-600">{descripcion}</p>
         <p className="font-bold mt-2">${precio}</p>

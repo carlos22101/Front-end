@@ -43,14 +43,17 @@ function MateriaPrima() {
       <Header />
       <div className="flex">
         <Sidebar />
-        <div className="flex-1 p-8">
-          <h1 className="text-2xl font-bold mb-4">Materia Prima</h1>
-          <SearchBarM onSearch={handleSearch} onAdd={handleAdd} />
+        <div className="flex flex-col w-full overflow-x-hidden">
+          <div>
+            <SearchBarM onSearch={handleSearch} onAdd={handleAdd} />
+          </div>
+          <div className="p-4 overflow-y-auto max-h-[520px] border border-gray-300 ">
           <CardContainerM>
             {filteredItems.map(item => (
               <CardM key={item.ID} item={item} onDelete={handleDelete} />
             ))}
           </CardContainerM>
+          </div>
         </div>
       </div>
     </>

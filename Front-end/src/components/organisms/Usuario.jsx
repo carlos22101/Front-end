@@ -1,15 +1,20 @@
-import Header from "../molecules/Header";
 import Sidebar from "../molecules/Sidebar";
+import Header from "../molecules/Header";
 
-function Usuario(){
+
+function Ventas() {
+
+  
     return (
-        <>
-        <Header></Header>
+      <>
+        <Header />
         <div className="flex">
-            <Sidebar></Sidebar>
-            <div ></div>
-        </div>
-        </>        
-    )
-}
-export default Usuario;
+          <Sidebar />
+    
+          </div>
+  
+      </>
+    ); 
+  }
+  
+  export default Ventas;

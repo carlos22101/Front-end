@@ -27,8 +27,36 @@ const CardContainerP = ({ searchValue }) => {
       });
   }, []);
 
-  const handleUpdate = (id) => {
-    console.log(`Actualizar proveedor con ID: ${id}`);
+  const handleUpdate = (ID_Proveedor) => {
+    console.log(`Actualizar proveedor con ID: ${ID_Proveedor}`);
+  };
+
+  const handleDelete = (ID_Proveedor) => {
+    fetch(`https://restauranteapi.integrador.xyz/api/Proveedores/${ID_Proveedor}`, {
+      method: 'DELETE',
+    })
+      .then((response) => {
+        if (response.ok) {
+          setProveedores(proveedores.filter((p) => p.ID_Proveedor !== ID_Proveedor));
+          Swal.fire({
+            title: 'Eliminado',
+            text: 'El proveedor ha sido eliminado correctamente',
+            icon: 'success',
+            confirmButtonText: 'Aceptar'
+          });
+        } else {
+          throw new Error('Error al eliminar el proveedor');
+        }
+      })
+      .catch((error) => {
+        console.error('Error eliminando proveedor:', error);
+        Swal.fire({
+          title: 'Error',
+          text: 'Hubo un error al eliminar el proveedor',
+          icon: 'error',
+          confirmButtonText: 'Aceptar'
+        });
+      });
   };
 
   return (
@@ -39,15 +67,13 @@ const CardContainerP = ({ searchValue }) => {
         )
         .map((proveedor) => (
           <CardP
-            key={proveedor.ID}
-            ID={proveedor.ID}
+            key={proveedor.ID_Proveedor}
+            ID_Proveedor={proveedor.ID_Proveedor}
             Nombre={proveedor.Nombre}
             Contacto={proveedor.Contacto}
             Informacion={proveedor.Informacion}
-            onDelete={(id) => {
-              setProveedores(proveedores.filter((p) => p.ID !== id));
-            }}
-            onUpdate={handleUpdate}
+            onDelete={() => handleDelete(proveedor.ID_Proveedor)}
+            onUpdate={() => handleUpdate(proveedor.ID_Proveedor)}
           />
         ))}
     </div>

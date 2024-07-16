@@ -1,11 +1,12 @@
-import React, { useState, useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import Swal from 'sweetalert2';
 import { useParams, useNavigate } from 'react-router-dom';
 import Header from '../molecules/Header';
 
 const ActualizarProveedor = () => {
   const navigate = useNavigate();
-  const { ID } = useParams();
+  const { ID_Proveedor } = useParams(); // Asegúrate de que el parámetro sea ID_Proveedor
+
   const [proveedor, setProveedor] = useState({
     Nombre: '',
     Contacto: '',
@@ -13,10 +14,10 @@ const ActualizarProveedor = () => {
   });
 
   useEffect(() => {
-    console.log('ID capturado:', ID); 
+    console.log('ID capturado:', ID_Proveedor);
 
-    if (ID) {
-      fetch(`https://restauranteapi.integrador.xyz/api/Proveedores/${ID}`)
+    if (ID_Proveedor) {
+      fetch(`https://restauranteapi.integrador.xyz/api/Proveedores/${ID_Proveedor}`)
         .then((response) => {
           if (!response.ok) {
             throw new Error('Error al obtener el proveedor');
@@ -36,7 +37,7 @@ const ActualizarProveedor = () => {
           });
         });
     }
-  }, [ID]);
+  }, [ID_Proveedor]);
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -47,7 +48,7 @@ const ActualizarProveedor = () => {
   };
 
   const handleConfirmar = () => {
-    fetch(`https://restauranteapi.integrador.xyz/api/Proveedores/${ID}`, {
+    fetch(`https://restauranteapi.integrador.xyz/api/Proveedores/${ID_Proveedor}`, {
       method: 'PUT',
       headers: {
         'Content-Type': 'application/json'
@@ -85,52 +86,53 @@ const ActualizarProveedor = () => {
 
   return (
     <>
-    <Header/>
-    <div className="p-4">
-      <h2>Actualizar Proveedor</h2>
-      <form>
-        <div className="mb-4">
-          <label className="block text-sm font-medium text-gray-700">Nombre:</label>
-          <input
-            type="text"
-            name="Nombre"
-            value={proveedor.Nombre}
-            onChange={handleChange}
-            className="px-3 py-2 border border-gray-300 rounded-md w-full"
-          />
-        </div>
-        <div className="mb-4">
-          <label className="block text-sm font-medium text-gray-700">Contacto:</label>
-          <input
-            type="text"
-            name="Contacto"
-            value={proveedor.Contacto}
-            onChange={handleChange}
-            className="px-3 py-2 border border-gray-300 rounded-md w-full"
-          />
-        </div>
-        <div className="mb-4">
-          <label className="block text-sm font-medium text-gray-700">Información:</label>
-          <textarea
-            name="Informacion"
-            value={proveedor.Informacion}
-            onChange={handleChange}
-            className="px-3 py-2 border border-gray-300 rounded-md w-full"
-          />
-        </div>
-        <div>
-          <button type="button" onClick={handleConfirmar} className="bg-green-500 text-white px-4 py-2 mr-2">
-            Confirmar
-          </button>
-          <button type="button" onClick={handleCancelar} className="bg-[#FF0000] text-white px-4 py-2">
-            Cancelar
-          </button>
-        </div>
-      </form>
-    </div>
+      <Header/>
+      <div className="p-4">
+        <h2>Actualizar Proveedor</h2>
+        <form>
+          <div className="mb-4">
+            <label className="block text-sm font-medium text-gray-700">Nombre:</label>
+            <input
+              type="text"
+              name="Nombre"
+              value={proveedor.Nombre}
+              onChange={handleChange}
+              className="px-3 py-2 border border-gray-300 rounded-md w-full"
+            />
+          </div>
+          <div className="mb-4">
+            <label className="block text-sm font-medium text-gray-700">Contacto:</label>
+            <input
+              type="text"
+              name="Contacto"
+              value={proveedor.Contacto}
+              onChange={handleChange}
+              className="px-3 py-2 border border-gray-300 rounded-md w-full"
+            />
+          </div>
+          <div className="mb-4">
+            <label className="block text-sm font-medium text-gray-700">Información:</label>
+            <textarea
+              name="Informacion"
+              value={proveedor.Informacion}
+              onChange={handleChange}
+              className="px-3 py-2 border border-gray-300 rounded-md w-full"
+            />
+          </div>
+          <div>
+            <button type="button" onClick={handleConfirmar} className="bg-green-500 text-white px-4 py-2 mr-2">
+              Confirmar
+            </button>
+            <button type="button" onClick={handleCancelar} className="bg-[#FF0000] text-white px-4 py-2">
+              Cancelar
+            </button>
+          </div>
+        </form>
+      </div>
     </>
   );
 };
 
 export default ActualizarProveedor;
+
 
