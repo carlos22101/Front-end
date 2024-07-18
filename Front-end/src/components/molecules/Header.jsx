@@ -19,6 +19,8 @@ function Header() {
         return 'Materia Prima';
       case '/Proveedores':
         return 'Proveedores';
+      case '/Pedido':
+        return 'Mesas'
       default:
         if (location.pathname.startsWith('/Actualizar/')) {
           return 'Actualizar';
