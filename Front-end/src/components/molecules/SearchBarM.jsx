@@ -22,7 +22,7 @@ const SearchBarM = ({ onSearch }) => {
       <h1 className="text-3xl font-bold">MATERIA PRIMA</h1>
       <div className="flex items-center space-x-2">
       <SearchInput value={searchTerm} onChange={handleSearchChange} placeholder="Search" />
-      <Button onClick={handleAdd} className="bg-green-500 text-white">Agregar</Button>
+      <Button onClick={handleAdd} Style="bg-green-500 text-white px-4 py-2 rounded-md ml-2">Agregar</Button>
     </div>
     </div>
   );

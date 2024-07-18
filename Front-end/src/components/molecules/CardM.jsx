@@ -1,7 +1,7 @@
 
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
-import ButtonM from '../atoms/Button';
+import ButtonM from '../atoms/ButtonM';
 import CustomText from '../atoms/CustomText';
 import Swal from 'sweetalert2';
 
@@ -57,8 +57,13 @@ const CardM = ({ item, onDelete }) => {
       <CustomText>En el inventario existen</CustomText>
       <CustomText className="font-semibold">{item.Cantidad} unidades</CustomText>
       <div className="flex justify-between mt-4">
-        <ButtonM onClick={handleUpdate} style='bg-green-600 hover:bg-green-700 text-white font-bold py-2 px-4 rounded'>Actualizar</ButtonM>
-        <ButtonM onClick={handleDelete} style='bg-red-600 hover:bg-red-700 text-white font-bold py-2 px-4 rounded'>Eliminar</ButtonM>
+      <ButtonM onClick={handleUpdate} Style='bg-green-600 hover:bg-green-700 text-white font-bold py-2 px-4 rounded'>
+  Actualizar
+</ButtonM>
+<ButtonM onClick={handleDelete} Style='bg-red-600 hover:bg-red-700 text-white font-bold py-2 px-4 rounded'>
+  Eliminar
+</ButtonM>
+
       </div>
     </div>
   );

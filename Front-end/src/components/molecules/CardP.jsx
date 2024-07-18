@@ -36,10 +36,10 @@ const CardP = ({ ID_Proveedor, Nombre, Contacto, Informacion, onDelete, onUpdate
       </div>
       <p className="text-gray-700 mb-4">{Informacion}</p>
       <div className="flex justify-between">
-        <button onClick={handleUpdate} className="text-white-500 hover:text-blue-700">
+        <button onClick={handleUpdate} className='bg-green-600 hover:bg-green-700 text-white font-bold py-2 px-4 rounded'>
           Actualizar
         </button>
-        <button onClick={handleDelete} className="text-red-500 hover:text-red-700">
+        <button onClick={handleDelete} className='bg-red-600 hover:bg-red-700 text-white font-bold py-2 px-4 rounded'>
           Eliminar
         </button>
       </div>

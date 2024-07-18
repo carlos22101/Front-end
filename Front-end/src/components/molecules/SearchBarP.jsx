@@ -19,7 +19,7 @@ const SearchBarP = ({ searchValue, onSearchChange, onSearch }) => {
         placeholder="Buscar"
         className="flex-grow border-none"
       />
-      <ButtonP onClick={handleAddClick} className="flex-shrink-0 ml-4">
+      <ButtonP onClick={handleAddClick} className="flex-shrink-0 ml-4 ">
         Agregar
       </ButtonP>
     </div>

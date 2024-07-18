@@ -1,6 +1,7 @@
 import React from 'react';
 import { useLocation } from 'react-router-dom';
 import { useNavigate } from 'react-router-dom';
+import Swal from 'sweetalert2';
 
 function Header() {
   const location = useLocation();
@@ -16,7 +17,7 @@ function Header() {
         return 'Agregar Platillo';
       case '/MateriaPrima':
         return 'Materia Prima';
-        case '/Proveedores':
+      case '/Proveedores':
         return 'Proveedores';
       default:
         if (location.pathname.startsWith('/Actualizar/')) {
@@ -26,25 +27,39 @@ function Header() {
     }
   };
 
+  const handleLogout = () => {
+    Swal.fire({
+      title: '¿Cerrar sesión?',
+      icon: 'question',
+      showCancelButton: true,
+      confirmButtonText: 'Cerrar sesión',
+      confirmButtonColor: '#66FF66',
+      cancelButtonColor: '#FF0000',
+      cancelButtonText: 'Cancelar',
+    }).then((result) => {
+      if (result.isConfirmed) {
+        navigate("/");
+      }
+    });
+  };
+
   return (
-    <>
-      <header className="bg-[#FF6600] flex items-center h-20 w-full">
-        <div className="flex items-center ml-4 ">
-          <img src="/Logo.png" alt="Logo" className="w-16" />
-          <div className="flex items-center ml-px mr-4">
+    <header className="bg-[#FF6600] flex items-center h-20 w-full">
+      <div className="flex flex-grow items-center ml-4 ">
+        <img src="/Logo.png" alt="Logo" className="w-16" />
+        <div className="flex items-center ml-px mr-4">
           LA TEHUANITA
-          </div>
-          <div className="text-white text-2xl font-bold ml-[400px]">
-            {getPageTitle()}
-          </div>
-          <div className='flex '>
-            <button> <img src="./Proveedor.png" alt=""  className='w-10 h-10 ml-[500px]'
-            onClick={()=> navigate("/")}
-            /></button>
-          </div>
         </div>
-      </header>
-    </>
+        <div className="text-white text-2xl font-bold ml-[400px] right-9">
+          {getPageTitle()}
+        </div>
+        <div className='ml-auto mr-4'>
+          <button className='inline-flex items-center right-9'>
+            <img src="./Proveedor.png" alt="" className='w-10 h-10' onClick={handleLogout}/>
+          </button>
+        </div>
+      </div>
+    </header>
   );
 }
 
