@@ -21,7 +21,7 @@ const Menu = () => {
   const handleDelete = (id) => {
     setPlatillos(platillos.filter(platillo => platillo.IDPlatillo !== id));
   };
-
+  
   const filteredPlatillos = platillos.filter(platillo =>
     platillo.Nombre.toLowerCase().includes(search.toLowerCase())
   );

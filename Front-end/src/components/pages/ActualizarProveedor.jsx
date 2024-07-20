@@ -5,7 +5,7 @@ import Header from '../molecules/Header';
 
 const ActualizarProveedor = () => {
   const navigate = useNavigate();
-  const { ID_Proveedor } = useParams(); // Asegúrate de que el parámetro sea ID_Proveedor
+  const { ID_Proveedor } = useParams();
 
   const [proveedor, setProveedor] = useState({
     Nombre: '',

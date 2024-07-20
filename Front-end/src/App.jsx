@@ -6,15 +6,16 @@ import Usuario from './components/organisms/Usuario';
 import Ventas from './components/organisms/Ventas';
 import Pedido from './components/organisms/Pedido';
 import MateriaPrima from './components/organisms/MateriaPrima';
-import Categoria from './components/organisms/Categoria';
 import Proveedores from './components/organisms/Proveedores';
 import Home from './components/pages/Home';
-import AgregarPlatillo from './components/molecules/AgregarPlatillo';
-import ActualizarPlatillo from './components/molecules/ActualizarPlatillo';
-import AgregarMateriaPrima from './components/molecules/AgregarMateriaPrima';
-import ActualizarMateriaPrima from './components/molecules/ActualizarMateriaPrima';
+import AgregarPlatillo from './components/pages/AgregarPlatillo';
+import ActualizarPlatillo from './components/pages/ActualizarPlatillo';
+import AgregarMateriaPrima from './components/pages/AgregarMateriaPrima';
+import ActualizarMateriaPrima from './components/pages/ActualizarMateriaPrima';
 import AgregarProveedor from './components/pages/AgregarProveedor';
 import ActualizarProveedor from './components/pages/ActualizarProveedor';
+import CardSelecPedido from './components/molecules/CardSelecPedido';
+import AgregarPedido from './components/pages/AgregarPedido';
 
 
 const App = () => {
@@ -27,7 +28,6 @@ const App = () => {
         <Route path='/Usuario' element={<Usuario/>}/>
         <Route path='/Ventas' element={<Ventas/>}/>
         <Route path='/Proveedores' element={<Proveedores/>}/>
-        <Route path='/Categoria' element={<Categoria/>}/>
         <Route path='/Pedido' element={<Pedido/>}/>
         <Route path='/MateriaPrima' element={<MateriaPrima/>}/>
         <Route path='/AgregarPlatillo' element={<AgregarPlatillo/>}/>
@@ -36,6 +36,8 @@ const App = () => {
         <Route path='/ActualizarMateriaPrima/:id' element={<ActualizarMateriaPrima/>}/>
         <Route path='/agregar-proveedor' element={<AgregarProveedor/>}/>
         <Route path='/actualizar-proveedor/:ID_Proveedor' element={<ActualizarProveedor/>}/>
+        <Route path='/SeleccionarPedido' element={<CardSelecPedido/>}/>
+        <Route path='/AgregarPedido' element={<AgregarPedido/>}/>
       </Routes>
     </Router>
   );

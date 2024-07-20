@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 import Input from '../atoms/Input';
 import Swal from 'sweetalert2';
-import Header from './Header';
+import Header from '../molecules/Header';
 
 const categorias = ['Desayunos', 'Comidas', 'Cenas'];
 
@@ -136,8 +136,7 @@ const ActualizarPlatillo = () => {
                     key={cat}
                     type="button"
                     className={`py-2 px-4 rounded ${Categoria === cat ? 'bg-green-500 text-white' : 'bg-gray-200'}`}
-                    onClick={() => setCategoria(cat)}
-                  >
+                    onClick={() => setCategoria(cat)}>
                     {cat}
                   </button>
                 ))}

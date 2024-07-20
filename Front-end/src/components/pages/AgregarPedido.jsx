@@ -1,20 +1,19 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import Input from '../atoms/Input';
 import Swal from 'sweetalert2';
-import Header from './Header';
+import Header from '../molecules/Header';
+import Button from '../atoms/Button';
 
-const AgregarPlatillo = () => {
-  const [Nombre, setNombre] = useState('');
-  const [Descripcion, setDescripcion] = useState('');
-  const [Precio, setPrecio] = useState('');
-  const [Categoria, setCategoria] = useState('');
+const AgregarPedido = () => {
+  const [IDMesa, setIDMesa] = useState('');
+  const [Total, setTotal] = useState('');
+  const [StatusPedido, setStatusPedido] = useState('');
   const navigate = useNavigate();
 
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    if (!Nombre || !Descripcion || !Precio || !Categoria) {
+    if (!IDMesa || !Total || !StatusPedido) {
       Swal.fire({
         title: 'Error',
         text: 'Por favor, llene todos los campos',
@@ -32,7 +31,7 @@ const AgregarPlatillo = () => {
           'Content-Type': 'application/json',
         },
         body: JSON.stringify({
-          Nombre,
+          IDMesa,
           Descripcion,
           Precio:parseFloat(Precio),
           Categoria,
@@ -44,7 +43,7 @@ const AgregarPlatillo = () => {
         console.log('Platillo agregado:', data);
         Swal.fire({
           title: '¡Éxito!',
-          text: 'Platillo agregado correctamente',
+          text: 'Pedido agregado correctamente',
           icon: 'success',
           confirmButtonText: 'Aceptar',
           confirmButtonColor: '#10B981',
@@ -74,71 +73,28 @@ const AgregarPlatillo = () => {
   };
 
   return (
-<>
+<>      
+    <div>
       <Header />
-      <div className="flex flex-col items-center justify-center min-h-screen bg-gray-100">
+      <div className="flex flex-col items-center justify-center bg-gray-100">
         <form onSubmit={handleSubmit} className="bg-white p-8 rounded shadow-md w-full max-w-4xl">
           <div className="grid grid-cols-1 gap-6">
             <div className="mb-4">
               <label htmlFor="nombre" className="block font-medium text-gray-700">
-                Nombre del platillo
+                Mesa
               </label>
-              <Input
-                type="text"
-                placeholder="Ingresa el nombre"
-                value={Nombre}
-                onChange={(e) => setNombre(e.target.value)}
-                className="mt-1 p-2 border border-gray-300 rounded-md w-full focus:ring-green-500 focus:border-green-500"
-              />
             </div>
             <div className="mb-4">
               <label htmlFor="informacion" className="block font-medium text-gray-700">
-                Información del platillo
-              </label>
-              <textarea
-                id="informacion"
-                value={Descripcion}
-                onChange={(e) => setDescripcion(e.target.value)}
-                className="mt-1 p-2 border border-gray-300 rounded-md w-full focus:ring-green-500 focus:border-green-500"
-                rows="4"
-                required
-              />
-            </div>
-            <div className="mb-4">
-              <label htmlFor="precio" className="block font-medium text-gray-700">
-                Precio
-              </label>
-              <Input
-                type="number"
-                placeholder="Ingresa el precio"
-                value={Precio}
-                onChange={(e) => setPrecio(e.target.value)}
-                className="mt-1 p-2 border border-gray-300 rounded-md w-full focus:ring-green-500 focus:border-green-500"
-              />
-            </div>
-            <div className="mb-4">
-              <label className="block font-medium text-gray-700">Categoría</label>
-              <div className="flex space-x-4">
-                {['Desayunos', 'Comidas', 'Cenas', 'Bebidas'].map((cat) => (
-                  <button
-                    key={cat}
-                    type="button"
-                    className={`py-2 px-4 rounded ${
-                      Categoria === cat ? 'bg-green-500 text-white' : 'bg-gray-200 text-gray-700'
-                    }`}
-                    onClick={() => setCategoria(cat)}
-                  >
-                    {cat}
-                  </button>
-                ))}
-              </div>
+              <Button>Agregar Platillo +</Button>
+            </label>
             </div>
           </div>
           <div className="flex justify-between mt-6">
             <button
               type="button"
               className="bg-red-500 text-white py-2 px-4 rounded hover:bg-red-700"
-              onClick={() => navigate('/menu')}
+              onClick={() => navigate('/Pedido')}
             >
               Cancelar
             </button>
@@ -151,7 +107,8 @@ const AgregarPlatillo = () => {
           </div>
         </form>
       </div>
+      </div>
     </>
   );
 };
-export default AgregarPlatillo;
+export default AgregarPedido;
