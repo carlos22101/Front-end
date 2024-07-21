@@ -14,15 +14,22 @@ function Pedido(){
         navigate('/SeleccionarPedido');
     };
 
-    useEffect(() => {
+    const fetchPedidos = () => {
         fetch(`https://restauranteapi.integrador.xyz/api/Pedidos`)
           .then(response => response.json())
           .then(data => {
             console.log(data);
             setPedido(data);
           });
+    };
+
+    useEffect(() => {
+        fetchPedidos();
       }, []);
 
+    const handleDeletePedido = (idpedido) => {
+        setPedido(pedido.filter(p => p.IDPedido !== idpedido));
+    };
 
     return (
         <>
@@ -38,7 +45,7 @@ function Pedido(){
                 </div>
                 <div>
                     {Array.isArray(pedido) && pedido.map(p => (
-                        <CardContainerPedido id={p.IDMesa} total={p.Total} statuspedido={p.StatusPedido} />
+                        <CardContainerPedido key={p.IDPedido} idpedido={p.IDPedido} IDMesa={p.IDMesa} Total={p.Total} StatusPedido={p.StatusPedido} onDelete={handleDeletePedido} onUpdate={fetchPedidos}/>
                     ))}
                 </div>
             </div> 
