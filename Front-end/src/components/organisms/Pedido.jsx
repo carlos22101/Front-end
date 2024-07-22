@@ -43,7 +43,7 @@ function Pedido(){
                         Agregar
                     </ButtonP>        
                 </div>
-                <div>
+                <div className= " p-4 overflow-y-auto max-h-[520px] border border-gray-300">
                     {Array.isArray(pedido) && pedido.map(p => (
                         <CardContainerPedido key={p.IDPedido} idpedido={p.IDPedido} IDMesa={p.IDMesa} Total={p.Total} StatusPedido={p.StatusPedido} onDelete={handleDeletePedido} onUpdate={fetchPedidos}/>
                     ))}

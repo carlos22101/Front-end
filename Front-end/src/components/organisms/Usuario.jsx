@@ -70,8 +70,8 @@ function Usuario() {
         <div className="p-4">
           {user ? (
             <>
-              <h1>Bienvenido, {user.Nombre}</h1>
-              <p>ID de usuario: {user.ID_Usuario}</p>
+              <h1>Bienvenido, {user[0].Nombre}</h1>
+              <p>ID de usuario: {user[0].ID_Usuario}</p>
               <button onClick={handleChangePassword} className="bg-blue-500 text-white px-4 py-2 rounded">
                 Cambiar contraseña
               </button>

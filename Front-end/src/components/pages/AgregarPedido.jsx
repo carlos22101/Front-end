@@ -1,17 +1,17 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import { useNavigate, useLocation } from 'react-router-dom';
 import Swal from 'sweetalert2';
 import Header from '../molecules/Header';
 import Button from '../atoms/Button';
-import CardSelectlatillo from '../molecules/CardSelectPlatillo';
+import CardSelectPlatillo from '../molecules/CardSelectPlatillo';
 
 const AgregarPedido = () => {
   const navigate = useNavigate();
   const location = useLocation();
   const { id: IDMesa } = location.state || {};
   const [verAgregar, setVerAgregar] = useState(false);
-  const [Total] = useState(0); 
-  const [StatusPedido] = useState(false);
+  const [total] = useState(0); 
+  const [statusPedido] = useState(false);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -24,8 +24,8 @@ const AgregarPedido = () => {
         },
         body: JSON.stringify({
           IDMesa,
-          Total,
-          StatusPedido,
+          Total: total,
+          StatusPedido: statusPedido,
         }),
       });
 
@@ -63,10 +63,10 @@ const AgregarPedido = () => {
     }
   };
 
-  const hanlderVerAgregar = (e) =>{
-    e.preventDefault()
-    setVerAgregar(!verAgregar)
-  }
+  const hanlderVerAgregar = (e) => {
+    e.preventDefault();
+    setVerAgregar(!verAgregar);
+  };
 
   return (
     <>
@@ -81,12 +81,12 @@ const AgregarPedido = () => {
                 </label>
               </div>
               <div className="mb-4">
-                  <Button type="button" onClick={hanlderVerAgregar}>Agregar Platillo +</Button>
-                  {verAgregar && (
-                  <div className=" left-full top-0 ml-2 bg-white border border-gray-300 rounded shadow-lg p-2">
-                    <CardSelectlatillo></CardSelectlatillo>
+                <Button type="button" onClick={hanlderVerAgregar}>Agregar Platillo +</Button>
+                {verAgregar && (
+                  <div className="overflow-y-auto max-h-[320px] left-full top-0 ml-2 bg-white border border-gray-300 rounded shadow-lg p-2">
+                    <CardSelectPlatillo />
                   </div>
-                  )}
+                )}
               </div>
             </div>
             <div className="flex justify-between mt-6">
