@@ -12,7 +12,7 @@ function Usuario() {
         const response = await fetch("https://restauranteapi.integrador.xyz/api/Usuario");
         const data = await response.json();
         console.log("Datos del usuario:", data);
-        setUser(data);
+        setUser(data[0]); 
       } catch (error) {
         console.error("Error al obtener los datos del usuario:", error);
       }
@@ -43,7 +43,7 @@ function Usuario() {
 
     if (formValues) {
       try {
-        const response = await fetch(`https://restauranteapi.integrador.xyz/api/Usuario/${user?.ID_Usuario}/password`, {
+        const response = await fetch(`https://restauranteapi.integrador.xyz/api/Usuario/${user.ID_Usuario}`, {
           method: 'PUT',
           headers: {
             'Content-Type': 'application/json',
@@ -70,8 +70,8 @@ function Usuario() {
         <div className="p-4">
           {user ? (
             <>
-              <h1>Bienvenido, {user[0].Nombre}</h1>
-              <p>ID de usuario: {user[0].ID_Usuario}</p>
+              <h1>Bienvenido, {user.Nombre}</h1>
+              <p>ID de usuario: {user.ID_Usuario}</p>
               <button onClick={handleChangePassword} className="bg-blue-500 text-white px-4 py-2 rounded">
                 Cambiar contraseña
               </button>
