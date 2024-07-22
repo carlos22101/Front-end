@@ -20,10 +20,20 @@ function Header() {
       case '/Proveedores':
         return 'Proveedores';
       case '/Pedido':
-        return 'Mesas'
+        return 'Mesas';
+      case '/AgregarMateriaPrima':
+        return 'Agreagar Materia Prima';
+      case '/agregar-proveedor':
+        return 'Agregar Proveedor';
+      case '/Ventas':
+        return 'Ventas';
       default:
         if (location.pathname.startsWith('/Actualizar/')) {
           return 'Actualizar';
+        }else if(location.pathname.startsWith('/ActualizarMateriaPrima/')){
+        return 'Actualizar Materia Prima';
+        }else if(location.pathname.startsWith('/actualizar-proveedor/')){
+          return 'Actualizar Proveedor';
         }
         return 'LA TEHUANITA';
     }

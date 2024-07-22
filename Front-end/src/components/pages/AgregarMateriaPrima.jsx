@@ -3,7 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import Header from '../molecules/Header';
 import CustomText from '../atoms/CustomText';
 import InputM from '../atoms/Input';
-import ButtonM from '../atoms/Button';
+import Button from '../atoms/Button';
 import Swal from 'sweetalert2';
 
 function AgregarMateriaPrima() {
@@ -39,38 +39,35 @@ function AgregarMateriaPrima() {
       console.error('Error:', error);
     });
   };
-  const handleCancel = () => {
-    navigate('/MateriaPrima')
-  }
 
   return (
     <>
       <Header />
-        <div className="flex flex-col items-center justify-center min-h-screen bg-gray-100">
-          <h1 className="text-2xl font-bold mb-4">Agregar Materia Prima</h1>
-          <form onSubmit={handleSubmit} className="bg-white p-8 rounded shadow-md w-full max-w-4xl">
+        <div className="flex flex-col items-center min-h-screen bg-gray-100">
+          <form onSubmit={handleSubmit} className="bg-white p-8 rounded shadow-md w-full max-w-4xl mt-5 h-72">
             <div>
-              <CustomText className="block mb-2">Nombre:</CustomText>
+              <CustomText className="block font-medium text-gray-700 mt-5">Nombre:</CustomText>
               <InputM 
                 type="text" 
+                placeholder="Ingresa el nombre"
                 value={nombre} 
                 onChange={(e) => setNombre(e.target.value)} 
                 required 
               />
             </div>
             <div>
-              <CustomText className="block mb-2">Cantidad:</CustomText>
+              <CustomText className="block font-medium text-gray-700 mt-7">Cantidad:</CustomText>
               <InputM 
                 type="number" 
+                placeholder="Ingresa la cantidad"
                 value={cantidad} 
                 onChange={(e) => setCantidad(e.target.value)} 
-                required 
-              />
+                required />
             </div>
-            <div><ButtonM type="button" onClick={handleCancel} style="bg-red-600 hover:bg-red-700 text-white font-bold py-2 px-4 rounded">
-            Cancelar
-          </ButtonM ></div>
-            <ButtonM style='bg-green-600 hover:bg-green-700 text-white font-bold py-2 px-4 rounded' type="submit">Agregar</ButtonM>
+            <div className="flex justify-between mt-7">
+              <Button type="button" Style={'bg-red-500 text-white py-2 px-4 rounded hover:bg-red-700'} onClick={() => navigate('/MAteriaPrima')}>Cancelar</Button>
+              <Button type="submit" Style={"bg-green-500 text-white py-2 px-4 rounded hover:bg-green-700"}>Agregar</Button>
+            </div>
           </form>
         </div>
     </>

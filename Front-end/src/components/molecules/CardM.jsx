@@ -1,12 +1,18 @@
 
-import React from 'react';
+import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import ButtonM from '../atoms/ButtonM';
 import CustomText from '../atoms/CustomText';
 import Swal from 'sweetalert2';
+import Button from '../atoms/Button';
 
 const CardM = ({ item, onDelete }) => {
+  const [VerBtns, setVerBtns] = useState(false)
   const navigate = useNavigate();
+
+  const handlerClick = () => {
+    setVerBtns(!VerBtns);
+  };
 
   const handleDelete = () => {
     Swal.fire({
@@ -52,18 +58,23 @@ const CardM = ({ item, onDelete }) => {
   };
 
   return (
-    <div className="border p-4 rounded shadow-md">
-      <CustomText className="font-bold text-lg mt-2">{item.Nombre}</CustomText>
-      <CustomText>En el inventario existen</CustomText>
-      <CustomText className="font-semibold">{item.Cantidad} unidades</CustomText>
-      <div className="flex justify-between mt-4">
-      <ButtonM onClick={handleUpdate} Style='bg-green-600 hover:bg-green-700 text-white font-bold py-2 px-4 rounded'>
-  Actualizar
-</ButtonM>
-<ButtonM onClick={handleDelete} Style='bg-red-600 hover:bg-red-700 text-white font-bold py-2 px-4 rounded'>
-  Eliminar
-</ButtonM>
+    <div className="border rounded-lg overflow-hidden shadow-lg m-2 w-64">
+      <div className='pl-56 relative inline-block '>
+        <Button onClick={handlerClick}>
+          •••
+        </Button>
 
+        {VerBtns && (
+          <div className='absolute right-9 top-1 translate-x-4 bg-white flex flex-col w-20'>
+            <Button onClick={handleDelete}>Eliminar</Button>
+            <Button onClick={handleUpdate}>Actualizar</Button>
+          </div>
+        )}
+      </div>
+      <div className="pl-4 pb-4 pr-4 bg-[#cccccc]">
+        <CustomText className="font-bold text-lg mt-2">{item.Nombre}</CustomText>
+        <CustomText>En el inventario existen</CustomText>
+        <CustomText className="font-semibold">{item.Cantidad} unidades</CustomText>
       </div>
     </div>
   );

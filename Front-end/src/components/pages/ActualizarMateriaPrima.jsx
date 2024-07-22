@@ -3,7 +3,7 @@ import { useNavigate, useParams } from 'react-router-dom';
 import Header from '../molecules/Header';
 import CustomText from '../atoms/CustomText';
 import InputM from '../atoms/Input';
-import ButtonM from '../atoms/Button';
+import Button from '../atoms/Button';
 import Swal from 'sweetalert2';
 
 function ActualizarMateriaPrima() {
@@ -62,12 +62,10 @@ function ActualizarMateriaPrima() {
   return (
     <>
       <Header />
-      <div className="flex">
-        <div className="flex-1 p-8">
-          <h1 className="text-2xl font-bold mb-4">Actualizar Materia Prima</h1>
-          <form onSubmit={handleSubmit} className="space-y-4">
+      <div className="flex flex-col items-center min-h-screen bg-gray-100">
+          <form onSubmit={handleSubmit} className="bg-white p-8 rounded shadow-md w-full max-w-4xl mt-5 h-72">
             <div>
-              <CustomText className="block mb-2">Nombre:</CustomText>
+              <CustomText className="block font-medium text-gray-700 mt-5">Nombre:</CustomText>
               <InputM 
                 type="text" 
                 value={nombre} 
@@ -76,7 +74,7 @@ function ActualizarMateriaPrima() {
               />
             </div>
             <div>
-              <CustomText className="block mb-2">Cantidad:</CustomText>
+              <CustomText className="block font-medium text-gray-700 mt-7">Cantidad:</CustomText>
               <InputM 
                 type="number" 
                 value={cantidad} 
@@ -84,12 +82,11 @@ function ActualizarMateriaPrima() {
                 required 
               />
             </div>
-            <div className="flex space-x-4">
-              <ButtonM type="submit" className="bg-[#66FF66] text-white">Confirmar</ButtonM>
-              <ButtonM type="button" className="bg-[#FF0000] text-white" onClick={handleCancel}>Cancelar</ButtonM>
+            <div className="flex justify-between mt-7">
+              <Button type="button" Style={"bg-red-500 text-white py-2 px-4 rounded hover:bg-red-700"} onClick={handleCancel}>Cancelar</Button>
+              <Button type="submit" Style={"bg-green-500 text-white py-2 px-4 rounded hover:bg-green-700"}>Confirmar</Button>
             </div>
           </form>
-        </div>
       </div>
     </>
   );

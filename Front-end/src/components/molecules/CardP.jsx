@@ -1,9 +1,15 @@
-import React from 'react';
+import React, { useState } from 'react';
 import Swal from 'sweetalert2';
 import { useNavigate } from 'react-router-dom';
+import Button from '../atoms/Button';
 
 const CardP = ({ ID_Proveedor, Nombre, Contacto, Informacion, onDelete, onUpdate }) => {
   const navigate = useNavigate();
+  const [VerBtns, setVerBtns] = useState(false)
+
+  const handlerClick = () =>{
+    setVerBtns(!VerBtns);
+  };
 
   const handleDelete = () => {
     Swal.fire({
@@ -26,7 +32,19 @@ const CardP = ({ ID_Proveedor, Nombre, Contacto, Informacion, onDelete, onUpdate
   };
 
   return (
-    <div className="bg-white shadow-md rounded p-4 m-4 w-64">
+    <div className="bg-white shadow-md rounded p-4 m-4 w-72 border border-gray-500">
+      <div className='pl-56 relative inline-block '>
+        <Button onClick={handlerClick}>
+          •••
+        </Button>
+
+        {VerBtns && (
+          <div className='absolute right-9 top-1 translate-x-4 bg-white flex flex-col w-20'>
+            <Button onClick={handleDelete}>Eliminar</Button>
+            <Button onClick={handleUpdate}>Actualizar</Button>
+          </div>
+        )}
+      </div>
       <div className="flex items-center mb-4">
         <img src="/Proveedor.png" alt="Proveedor" className="w-12 h-12 rounded-full bg-gray-300" />
         <div className="ml-4">
@@ -35,14 +53,6 @@ const CardP = ({ ID_Proveedor, Nombre, Contacto, Informacion, onDelete, onUpdate
         </div>
       </div>
       <p className="text-gray-700 mb-4">{Informacion}</p>
-      <div className="flex justify-between">
-        <button onClick={handleUpdate} className='bg-green-600 hover:bg-green-700 text-white font-bold py-2 px-4 rounded'>
-          Actualizar
-        </button>
-        <button onClick={handleDelete} className='bg-red-600 hover:bg-red-700 text-white font-bold py-2 px-4 rounded'>
-          Eliminar
-        </button>
-      </div>
     </div>
   );
 };

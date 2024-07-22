@@ -57,12 +57,9 @@ const Card = ({ id, nombre, descripcion, precio, Categoria, onDelete }) => {
   const handleUpdate = () => {
     navigate(`/Actualizar/${id}`, { state: { id, nombre, descripcion, precio, Categoria } });
   };
-
+  
   return (
     <div className="border rounded-lg overflow-hidden shadow-lg m-2 w-64">
-      <div className='border-2 border-solid border-black h-10 '>
-        <img src="" alt="" />
-      </div>
       <div className='pl-56 relative inline-block '>
         <Button onClick={handlerClick}>
           •••

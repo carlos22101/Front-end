@@ -45,11 +45,10 @@ const AgregarProveedor = () => {
   return (
     <>
     <Header/>
-    <div className="p-8">
-      <h2 className="text-2xl mb-4">Agregar Proveedor</h2>
-      <form onSubmit={handleSubmit} className="space-y-4">
+    <div className="flex flex-col items-center min-h-screen bg-gray-100">
+      <form onSubmit={handleSubmit} className="bg-white p-8 rounded shadow-md w-full max-w-4xl mt-5">
         <div>
-          <label className="block text-sm font-medium text-gray-700">Nombre</label>
+          <label className="block font-medium text-gray-700 mt-5">Nombre:</label>
           <InputP
             value={nombre}
             onChange={(e) => setNombre(e.target.value)}
@@ -59,7 +58,7 @@ const AgregarProveedor = () => {
           />
         </div>
         <div>
-          <label className="block text-sm font-medium text-gray-700">Contacto</label>
+          <label className="block font-medium text-gray-700 mt-5">Contacto:</label>
           <InputP
             value={contacto}
             onChange={(e) => setContacto(e.target.value)}
@@ -69,7 +68,7 @@ const AgregarProveedor = () => {
           />
         </div>
         <div>
-          <label className="block text-sm font-medium text-gray-700">Informacion</label>
+          <label className="block font-medium text-gray-700 mt-5">Informacion:</label>
           <InputP
             value={informacion}
             onChange={(e) => setInformacion(e.target.value)}
@@ -78,12 +77,12 @@ const AgregarProveedor = () => {
             required
           />
         </div>
-        <div className="flex space-x-4">
-          <ButtonP type="submit" className="bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded">
-            Aceptar y Agregar
-          </ButtonP>
+        <div className="flex justify-between mt-7">
           <ButtonP type="button" onClick={handleCancel} className="bg-red-600 hover:bg-red-700 text-white font-bold py-2 px-4 rounded">
             Cancelar
+          </ButtonP>
+          <ButtonP type="submit" className="bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded">
+            Aceptar y Agregar
           </ButtonP>
         </div>
       </form>

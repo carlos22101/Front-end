@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import Swal from 'sweetalert2';
 import { useParams, useNavigate } from 'react-router-dom';
 import Header from '../molecules/Header';
+import Button from '../atoms/Button';
 
 const ActualizarProveedor = () => {
   const navigate = useNavigate();
@@ -14,8 +15,6 @@ const ActualizarProveedor = () => {
   });
 
   useEffect(() => {
-    console.log('ID capturado:', ID_Proveedor);
-
     if (ID_Proveedor) {
       fetch(`https://restauranteapi.integrador.xyz/api/Proveedores/${ID_Proveedor}`)
         .then((response) => {
@@ -56,29 +55,35 @@ const ActualizarProveedor = () => {
       body: JSON.stringify(proveedor)
     })
       .then((response) => {
-        if (response.ok) {
-          Swal.fire({
-            title: 'Actualizado',
-            text: 'El proveedor ha sido actualizado correctamente',
-            icon: 'success',
-            confirmButtonText: 'Aceptar'
-          }).then(() => {
-            navigate('/Proveedores');
+        if (!response.ok) {
+          return response.text().then((text) => {
+            throw new Error(text);
           });
-        } else {
-          throw new Error('Error al actualizar el proveedor');
         }
+        return response.json();
+      })
+      .then(() => {
+        Swal.fire({
+          title: 'Actualizado',
+          text: 'El proveedor ha sido actualizado correctamente',
+          icon: 'success',
+          confirmButtonText: 'Aceptar'
+        }).then(() => {
+          navigate('/Proveedores');
+        });
       })
       .catch((error) => {
         console.error('Error updating proveedor:', error);
         Swal.fire({
           title: 'Error',
-          text: 'Hubo un error al actualizar el proveedor',
+          text: `Hubo un error al actualizar el proveedor: ${error.message}`,
           icon: 'error',
           confirmButtonText: 'Aceptar'
         });
       });
   };
+  
+  
 
   const handleCancelar = () => {
     navigate('/Proveedores');
@@ -86,46 +91,41 @@ const ActualizarProveedor = () => {
 
   return (
     <>
-      <Header/>
-      <div className="p-4">
-        <h2>Actualizar Proveedor</h2>
-        <form>
-          <div className="mb-4">
-            <label className="block text-sm font-medium text-gray-700">Nombre:</label>
+      <Header />
+      <div className="flex flex-col items-center min-h-screen bg-gray-100">
+        <form className='bg-white p-8 rounded shadow-md w-full max-w-4xl mt-5'>
+          <div>
+            <label className="block font-medium text-gray-700 mt-5">Nombre:</label>
             <input
               type="text"
               name="Nombre"
               value={proveedor.Nombre}
               onChange={handleChange}
-              className="px-3 py-2 border border-gray-300 rounded-md w-full"
+              className="mt-1 block w-full border border-gray-300 rounded-md p-2"
             />
           </div>
-          <div className="mb-4">
-            <label className="block text-sm font-medium text-gray-700">Contacto:</label>
+          <div>
+            <label className="block font-medium text-gray-700 mt-5">Contacto:</label>
             <input
               type="text"
               name="Contacto"
               value={proveedor.Contacto}
               onChange={handleChange}
-              className="px-3 py-2 border border-gray-300 rounded-md w-full"
+              className="mt-1 block w-full border border-gray-300 rounded-md p-2"
             />
           </div>
-          <div className="mb-4">
-            <label className="block text-sm font-medium text-gray-700">Información:</label>
+          <div>
+            <label className="block font-medium text-gray-700 mt-5">Información:</label>
             <textarea
               name="Informacion"
               value={proveedor.Informacion}
               onChange={handleChange}
-              className="px-3 py-2 border border-gray-300 rounded-md w-full"
+              className="mt-1 block w-full border border-gray-300 rounded-md p-2"
             />
           </div>
-          <div>
-            <button type="button" onClick={handleConfirmar} className="bg-green-500 text-white px-4 py-2 mr-2">
-              Confirmar
-            </button>
-            <button type="button" onClick={handleCancelar} className="bg-[#FF0000] text-white px-4 py-2">
-              Cancelar
-            </button>
+          <div className="flex justify-between mt-7">
+            <Button type="button" onClick={handleCancelar} Style={"bg-red-600 hover:bg-red-700 text-white font-bold py-2 px-4 rounded"}>Cancelar</Button>
+            <Button type="button" onClick={handleConfirmar} Style={"bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded"}>Confirmar</Button>
           </div>
         </form>
       </div>
@@ -134,5 +134,3 @@ const ActualizarProveedor = () => {
 };
 
 export default ActualizarProveedor;
-
-

@@ -76,10 +76,10 @@ const AgregarPlatillo = () => {
   return (
 <>
       <Header />
-      <div className="flex flex-col items-center justify-center min-h-screen bg-gray-100">
-        <form onSubmit={handleSubmit} className="bg-white p-8 rounded shadow-md w-full max-w-4xl">
+      <div className="flex flex-col items-center min-h-screen bg-gray-100">
+        <form onSubmit={handleSubmit} className="bg-white p-8 rounded shadow-md w-full max-w-4xl mt-2">
           <div className="grid grid-cols-1 gap-6">
-            <div className="mb-4">
+            <div>
               <label htmlFor="nombre" className="block font-medium text-gray-700">
                 Nombre del platillo
               </label>
@@ -91,7 +91,7 @@ const AgregarPlatillo = () => {
                 className="mt-1 p-2 border border-gray-300 rounded-md w-full focus:ring-green-500 focus:border-green-500"
               />
             </div>
-            <div className="mb-4">
+            <div>
               <label htmlFor="informacion" className="block font-medium text-gray-700">
                 Información del platillo
               </label>
@@ -100,11 +100,10 @@ const AgregarPlatillo = () => {
                 value={Descripcion}
                 onChange={(e) => setDescripcion(e.target.value)}
                 className="mt-1 p-2 border border-gray-300 rounded-md w-full focus:ring-green-500 focus:border-green-500"
-                rows="4"
                 required
               />
             </div>
-            <div className="mb-4">
+            <div>
               <label htmlFor="precio" className="block font-medium text-gray-700">
                 Precio
               </label>
@@ -116,7 +115,7 @@ const AgregarPlatillo = () => {
                 className="mt-1 p-2 border border-gray-300 rounded-md w-full focus:ring-green-500 focus:border-green-500"
               />
             </div>
-            <div className="mb-4">
+            <div>
               <label className="block font-medium text-gray-700">Categoría</label>
               <div className="flex space-x-4">
                 {['Desayunos', 'Comidas', 'Cenas', 'Bebidas'].map((cat) => (
@@ -145,7 +144,7 @@ const AgregarPlatillo = () => {
             <button
               type="submit"
               className="bg-green-500 text-white py-2 px-4 rounded hover:bg-green-700"
-            >
+            > 
               Agregar
             </button>
           </div>

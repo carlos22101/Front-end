@@ -70,7 +70,6 @@ const AgregarPedido = () => {
 
   return (
     <>
-      <div>
         <Header />
         <div className="flex flex-col items-center justify-center bg-gray-100">
           <form onSubmit={handleSubmit} className="bg-white p-8 rounded shadow-md w-full max-w-4xl">
@@ -106,7 +105,6 @@ const AgregarPedido = () => {
             </div>
           </form>
         </div>
-      </div>
     </>
   );
 };

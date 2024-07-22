@@ -47,7 +47,7 @@ function MateriaPrima() {
           <div>
             <SearchBarM onSearch={handleSearch} onAdd={handleAdd} />
           </div>
-          <div className="p-4 overflow-y-auto max-h-[520px] border border-gray-300 ">
+          <div className="flex flex-wrap p-4 overflow-y-auto max-h-[520px] border border-gray-300 ">
           <CardContainerM>
             {filteredItems.map(item => (
               <CardM key={item.ID} item={item} onDelete={handleDelete} />
