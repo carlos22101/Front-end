@@ -4,26 +4,49 @@ import Input from '../atoms/Input';
 import Swal from 'sweetalert2';
 import Header from '../molecules/Header';
 
-const categorias = ['Desayunos', 'Comidas', 'Cenas'];
+const categorias = ['Desayunos', 'Comidas', 'Cenas' , 'Bebidas'];
 
 const ActualizarPlatillo = () => {
   const { id } = useParams();
   const [Nombre, setNombre] = useState('');
   const [Descripcion, setDescripcion] = useState('');
   const [Precio, setPrecio] = useState('');
-  const [Categoria, setCategoria] = useState(''); 
+  const [Categoria, setCategoria] = useState('');
   const navigate = useNavigate();
 
   useEffect(() => {
-    fetch(`https://restauranteapi.integrador.xyz/api/Platillos/${id}`)
-      .then(response => response.json())
+    const token = sessionStorage.getItem('token'); 
+  
+    fetch(`https://restauranteapi.integrador.xyz/api/Platillos/${id}`, {
+      headers: {
+        'x-access-token': token, 
+        'Content-Type': 'application/json'
+      }
+    })
+      .then(response => {
+        if (!response.ok) {
+          throw new Error('Error al obtener el platillo');
+        }
+        return response.json();
+      })
       .then(data => {
         setNombre(data.Nombre);
         setDescripcion(data.Descripcion);
         setPrecio(data.Precio);
-        setCategoria(data.Categoria); 
+        setCategoria(data.Categoria);
+      })
+      .catch(error => {
+        console.error('Error fetching platillo:', error);
+        Swal.fire({
+          title: 'Error',
+          text: 'Hubo un error al cargar el platillo',
+          icon: 'error',
+          confirmButtonText: 'Aceptar',
+          confirmButtonColor: '#FF0000',
+        });
       });
   }, [id]);
+  
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -39,15 +62,28 @@ const ActualizarPlatillo = () => {
       return;
     }
 
+    const precioNumerico = parseFloat(Precio);
+    if (isNaN(precioNumerico)) {
+      Swal.fire({
+        title: 'Error',
+        text: 'El precio debe ser un número válido',
+        icon: 'error',
+        confirmButtonText: 'Aceptar',
+        confirmButtonColor: '#FF0000',
+      });
+      return;
+    }
+
     fetch(`https://restauranteapi.integrador.xyz/api/Platillos/${id}`, {
       method: 'PUT',
       headers: {
         'Content-Type': 'application/json',
+        'x-access-token': sessionStorage.getItem('token'), 
       },
       body: JSON.stringify({
         Nombre,
         Descripcion,
-        Precio,
+        Precio: precioNumerico,
         Categoria,
       }),
     })
@@ -63,19 +99,16 @@ const ActualizarPlatillo = () => {
             navigate('/menu');
           });
         } else {
-          Swal.fire({
-            title: 'Error',
-            text: 'No se pudo actualizar el platillo',
-            icon: 'error',
-            confirmButtonText: 'Aceptar',
-            confirmButtonColor: '#FF0000',
+          return response.text().then(text => {
+            throw new Error(text);
           });
         }
       })
       .catch(error => {
+        console.error('Error updating platillo:', error);
         Swal.fire({
           title: 'Error',
-          text: 'Error en la solicitud',
+          text: `Error en la solicitud: ${error.message}`,
           icon: 'error',
           confirmButtonText: 'Aceptar',
           confirmButtonColor: '#FF0000',
@@ -85,7 +118,7 @@ const ActualizarPlatillo = () => {
 
   return (
     <>
-    <Header/>
+      <Header />
       <div className="flex flex-col items-center min-h-screen bg-gray-100">
         <form onSubmit={handleSubmit} className="bg-[#FFFFFF] p-8 rounded shadow-md w-full max-w-4xl mt-2">
           <div className="grid grid-cols-1 gap-6">
@@ -135,7 +168,8 @@ const ActualizarPlatillo = () => {
                     key={cat}
                     type="button"
                     className={`py-2 px-4 rounded ${Categoria === cat ? 'bg-green-500 text-white' : 'bg-gray-200'}`}
-                    onClick={() => setCategoria(cat)}>
+                    onClick={() => setCategoria(cat)}
+                  >
                     {cat}
                   </button>
                 ))}
@@ -143,10 +177,17 @@ const ActualizarPlatillo = () => {
             </div>
           </div>
           <div className="flex justify-between mt-6">
-            <button type="button" className="bg-[#FF0000] text-white py-2 px-4 rounded hover:bg-red-700" onClick={() => navigate('/menu')}>
+            <button
+              type="button"
+              className="bg-[#FF0000] text-white py-2 px-4 rounded hover:bg-red-700"
+              onClick={() => navigate('/menu')}
+            >
               Cancelar
             </button>
-            <button type="submit" className="bg-[#66FF66] text-white py-2 px-4 rounded hover:bg-green-700">
+            <button
+              type="submit"
+              className="bg-[#66FF66] text-white py-2 px-4 rounded hover:bg-green-700"
+            >
               Actualizar
             </button>
           </div>

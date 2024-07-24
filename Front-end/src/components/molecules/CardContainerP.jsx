@@ -6,7 +6,13 @@ const CardContainerP = ({ searchValue }) => {
   const [proveedores, setProveedores] = useState([]);
 
   useEffect(() => {
-    fetch('https://restauranteapi.integrador.xyz/api/Proveedores')
+    const token = sessionStorage.getItem('token');
+    fetch('https://restauranteapi.integrador.xyz/api/Proveedores',{
+      headers: {
+        'Content-Type': 'application/json',
+        'x-access-token': token 
+      }
+    })
       .then((response) => {
         if (!response.ok) {
           throw new Error('Error al obtener los proveedores');
@@ -22,7 +28,8 @@ const CardContainerP = ({ searchValue }) => {
           title: 'Error',
           text: 'Hubo un error al cargar los proveedores',
           icon: 'error',
-          confirmButtonText: 'Aceptar'
+          confirmButtonText: 'Aceptar',
+          confirmButtonColor: '#66FF66'
         });
       });
   }, []);
@@ -32,8 +39,13 @@ const CardContainerP = ({ searchValue }) => {
   };
 
   const handleDelete = (ID_Proveedor) => {
+    const token = sessionStorage.getItem('token');
     fetch(`https://restauranteapi.integrador.xyz/api/Proveedores/${ID_Proveedor}`, {
       method: 'DELETE',
+      headers: {
+        'Content-Type': 'application/json',
+        'x-access-token': token 
+      }
     })
       .then((response) => {
         if (response.ok) {
@@ -54,7 +66,8 @@ const CardContainerP = ({ searchValue }) => {
           title: 'Error',
           text: 'Hubo un error al eliminar el proveedor',
           icon: 'error',
-          confirmButtonText: 'Aceptar'
+          confirmButtonText: 'Aceptar',
+          confirmButtonColor: '#66FF66'
         });
       });
   };

@@ -34,8 +34,13 @@ function CardContainerPedido({idpedido, IDMesa, Total, StatusPedido, onDelete, o
           cancelButtonText: 'No, cancelar',
         }).then((result) => {
           if (result.isConfirmed) {
+            const token = sessionStorage.getItem('token');
             fetch(`https://restauranteapi.integrador.xyz/api/Pedidos/${idpedido}`, {
               method: 'DELETE',
+              headers: {
+                'Content-Type': 'application/json',
+                'x-access-token': token 
+              }
             })
               .then(response => {
                 if (response.ok) {
@@ -65,11 +70,13 @@ function CardContainerPedido({idpedido, IDMesa, Total, StatusPedido, onDelete, o
       };
 
     const handleSould = () => {
+      const token = sessionStorage.getItem('token');
       StatusPedido=true;
       fetch(`https://restauranteapi.integrador.xyz/api/Pedidos/${idpedido}`, {
         method: 'PUT',
         headers: {
           'Content-Type': 'application/json',
+          'x-access-token': token 
         },
         body: JSON.stringify({
           IDMesa,

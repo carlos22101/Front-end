@@ -26,8 +26,13 @@ const CardM = ({ item, onDelete }) => {
       cancelButtonText: 'Cancelar'
     }).then((result) => {
       if (result.isConfirmed) {
+        const token = sessionStorage.getItem('token');
         fetch(`https://restauranteapi.integrador.xyz/api/Materia_Prima/${item.ID}`, {
           method: 'DELETE',
+          headers: {
+            'Content-Type': 'application/json',
+            'x-access-token': token 
+          }
         })
         .then(response => {
           if (response.ok) {

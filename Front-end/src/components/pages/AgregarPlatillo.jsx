@@ -26,15 +26,17 @@ const AgregarPlatillo = () => {
     }
 
     try {
+      const token = sessionStorage.getItem('token');
       const response = await fetch('https://restauranteapi.integrador.xyz/api/Platillos', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
+          'x-access-token': token,
         },
         body: JSON.stringify({
           Nombre,
           Descripcion,
-          Precio:parseFloat(Precio),
+          Precio: parseFloat(Precio),
           Categoria,
         }),
       });
@@ -74,7 +76,7 @@ const AgregarPlatillo = () => {
   };
 
   return (
-<>
+    <>
       <Header />
       <div className="flex flex-col items-center min-h-screen bg-gray-100">
         <form onSubmit={handleSubmit} className="bg-white p-8 rounded shadow-md w-full max-w-4xl mt-2">
@@ -144,7 +146,7 @@ const AgregarPlatillo = () => {
             <button
               type="submit"
               className="bg-green-500 text-white py-2 px-4 rounded hover:bg-green-700"
-            > 
+            >
               Agregar
             </button>
           </div>
@@ -153,4 +155,5 @@ const AgregarPlatillo = () => {
     </>
   );
 };
+
 export default AgregarPlatillo;

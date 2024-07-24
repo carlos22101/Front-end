@@ -10,12 +10,30 @@ const Menu = () => {
   const [search, setSearch] = useState('');
 
   useEffect(() => {
-    fetch(`https://restauranteapi.integrador.xyz/api/Platillos`)
-      .then(response => response.json())
-      .then(data => {
+    const fetchPlatillos = async () => {
+      const token = sessionStorage.getItem('token');
+      try {
+        const response = await fetch('https://restauranteapi.integrador.xyz/api/Platillos', {
+          method: 'GET',
+          headers: {
+            'Content-Type': 'application/json',
+            'x-access-token': token 
+          }
+        });
+
+        if (!response.ok) {
+          throw new Error(`¡Error HTTP! estado: ${response.status}`);
+        }
+
+        const data = await response.json();
         console.log(data);
         setPlatillos(data);
-      });
+      } catch (error) {
+        console.error('Error durante la carga de platillos:', error);
+      }
+    };
+
+    fetchPlatillos();
   }, []);
 
   const handleDelete = (id) => {
@@ -26,7 +44,6 @@ const Menu = () => {
     platillo.Nombre.toLowerCase().includes(search.toLowerCase())
   );
 
-
   const groupByCategoria = filteredPlatillos.reduce((acc, platillo) => {
     const categoria = platillo.Categoria || 'Otro';
     if (!acc[categoria]) {
@@ -35,7 +52,6 @@ const Menu = () => {
     acc[categoria].push(platillo);
     return acc;
   }, {});
-
 
   const categorias = Object.keys(groupByCategoria);
 
@@ -48,7 +64,7 @@ const Menu = () => {
           <div>
             <SearchBar setSearch={setSearch} />
           </div>
-          <div className="p-4 overflow-y-auto max-h-[520px] border border-gray-300 ">
+          <div className="p-4 overflow-y-auto max-h-[520px] border border-gray-300">
             {categorias.map((categoria, index) => (
               <CardContainer key={index} category={categoria}>
                 {groupByCategoria[categoria].map(platillo => (

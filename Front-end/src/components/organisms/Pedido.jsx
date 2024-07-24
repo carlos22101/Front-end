@@ -15,7 +15,13 @@ function Pedido(){
     };
 
     const fetchPedidos = () => {
-        fetch(`https://restauranteapi.integrador.xyz/api/Pedidos`)
+        const token = sessionStorage.getItem('token');
+        fetch(`https://restauranteapi.integrador.xyz/api/Pedidos`,{
+            headers: {
+                'Content-Type': 'application/json',
+                'x-access-token': token 
+              }
+        })
           .then(response => response.json())
           .then(data => {
             console.log(data);

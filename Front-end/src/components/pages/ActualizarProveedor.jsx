@@ -46,44 +46,41 @@ const ActualizarProveedor = () => {
     }));
   };
 
-  const handleConfirmar = () => {
-    fetch(`https://restauranteapi.integrador.xyz/api/Proveedores/${ID_Proveedor}`, {
-      method: 'PUT',
-      headers: {
-        'Content-Type': 'application/json'
-      },
-      body: JSON.stringify(proveedor)
-    })
-      .then((response) => {
-        if (!response.ok) {
-          return response.text().then((text) => {
-            throw new Error(text);
-          });
-        }
-        return response.json();
-      })
-      .then(() => {
-        Swal.fire({
-          title: 'Actualizado',
-          text: 'El proveedor ha sido actualizado correctamente',
-          icon: 'success',
-          confirmButtonText: 'Aceptar'
-        }).then(() => {
-          navigate('/Proveedores');
-        });
-      })
-      .catch((error) => {
-        console.error('Error updating proveedor:', error);
-        Swal.fire({
-          title: 'Error',
-          text: `Hubo un error al actualizar el proveedor: ${error.message}`,
-          icon: 'error',
-          confirmButtonText: 'Aceptar'
-        });
+  const handleConfirmar = async () => {
+    try {
+      const token = sessionStorage.getItem('token');  
+      const response = await fetch(`https://restauranteapi.integrador.xyz/api/Proveedores/${ID_Proveedor}`, {
+        method: 'PUT',
+        headers: {
+          'Content-Type': 'application/json',
+          'x-access-token': token,
+        },
+        body: JSON.stringify(proveedor),
       });
+
+      if (!response.ok) {
+        const text = await response.text();
+        throw new Error(text);
+      }
+
+      Swal.fire({
+        title: 'Actualizado',
+        text: 'El proveedor ha sido actualizado correctamente',
+        icon: 'success',
+        confirmButtonText: 'Aceptar'
+      }).then(() => {
+        navigate('/Proveedores');
+      });
+    } catch (error) {
+      console.error('Error updating proveedor:', error);
+      Swal.fire({
+        title: 'Error',
+        text: `Hubo un error al actualizar el proveedor: ${error.message}`,
+        icon: 'error',
+        confirmButtonText: 'Aceptar'
+      });
+    }
   };
-  
-  
 
   const handleCancelar = () => {
     navigate('/Proveedores');
@@ -93,7 +90,7 @@ const ActualizarProveedor = () => {
     <>
       <Header />
       <div className="flex flex-col items-center min-h-screen bg-gray-100">
-        <form className='bg-white p-8 rounded shadow-md w-full max-w-4xl mt-5'>
+        <form className="bg-white p-8 rounded shadow-md w-full max-w-4xl mt-5">
           <div>
             <label className="block font-medium text-gray-700 mt-5">Nombre:</label>
             <input
@@ -124,8 +121,20 @@ const ActualizarProveedor = () => {
             />
           </div>
           <div className="flex justify-between mt-7">
-            <Button type="button" onClick={handleCancelar} Style={"bg-red-600 hover:bg-red-700 text-white font-bold py-2 px-4 rounded"}>Cancelar</Button>
-            <Button type="button" onClick={handleConfirmar} Style={"bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded"}>Confirmar</Button>
+            <Button
+              type="button"
+              onClick={handleCancelar}
+              Style="bg-red-600 hover:bg-red-700 text-white font-bold py-2 px-4 rounded"
+            >
+              Cancelar
+            </Button>
+            <Button
+              type="button"
+              onClick={handleConfirmar}
+              Style="bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded"
+            >
+              Confirmar
+            </Button>
           </div>
         </form>
       </div>

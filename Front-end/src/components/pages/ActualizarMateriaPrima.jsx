@@ -13,7 +13,13 @@ function ActualizarMateriaPrima() {
   const navigate = useNavigate();
 
   useEffect(() => {
-    fetch(`https://restauranteapi.integrador.xyz/api/Materia_Prima/${id}`)
+    const token = sessionStorage.getItem('token');
+    fetch(`https://restauranteapi.integrador.xyz/api/Materia_Prima/${id}`,{
+      headers: {
+        'x-access-token': token, 
+        'Content-Type': 'application/json'
+      }
+    })
       .then(response => response.json())
       .then(data => {
         setNombre(data.Nombre);
@@ -23,11 +29,13 @@ function ActualizarMateriaPrima() {
   }, [id]);
 
   const handleSubmit = (event) => {
+    const token = sessionStorage.getItem('token');
     event.preventDefault();
     fetch(`https://restauranteapi.integrador.xyz/api/Materia_Prima/${id}`, {
       method: 'PUT',
       headers: {
-        'Content-Type': 'application/json'
+        'Content-Type': 'application/json',
+        'x-access-token': token,
       },
       body: JSON.stringify({
         Nombre: nombre,

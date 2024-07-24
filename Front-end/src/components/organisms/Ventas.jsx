@@ -7,7 +7,13 @@ function Ventas() {
   const [venta, setVenta] = useState([]);
 
     useEffect(() => {
-      fetch(`https://restauranteapi.integrador.xyz/api/Ventas`)
+      const token = sessionStorage.getItem('token');
+      fetch(`https://restauranteapi.integrador.xyz/api/Ventas`,{
+        headers: {
+          'Content-Type': 'application/json',
+          'x-access-token': token 
+        }
+      })
           .then(response => response.json())
           .then(data => {
             console.log(data);

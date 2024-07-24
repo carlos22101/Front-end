@@ -18,7 +18,9 @@ const CardP = ({ ID_Proveedor, Nombre, Contacto, Informacion, onDelete, onUpdate
       icon: 'warning',
       showCancelButton: true,
       confirmButtonText: 'Sí, eliminar',
-      cancelButtonText: 'Cancelar'
+      cancelButtonText: 'Cancelar',
+      confirmButtonColor: '#66FF66',
+      cancelButtonColor: '#ff0000'
     }).then((result) => {
       if (result.isConfirmed) {
         onDelete();

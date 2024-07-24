@@ -2,6 +2,7 @@ import Swal from "sweetalert2";
 import Button from "../atoms/Button";
 import Header from "./Header";
 import { useNavigate } from "react-router-dom";
+import { useState, useEffect } from "react";
 
 function CardSelecPedido() {
     const navigate = useNavigate();
@@ -17,17 +18,63 @@ function CardSelecPedido() {
         { id: 8, nombre: 'Mesa 8' },
     ];
 
-    const handlerClick = (id) => {
-        Swal.fire({
-            title: `Mesa ${id}`,
-            text: "¿Estás seguro de seleccionar esta mesa?",
-            showConfirmButton: true,
-            preConfirm: () => {
-                return new Promise((resolve) => {
-                    resolve(navigate(`/AgregarPedido`, { state: { id } }));
+    const [mesasOcupadas, setMesasOcupadas] = useState([]);
+
+    useEffect(() => {
+        const fetchMesasOcupadas = async () => {
+            const token = sessionStorage.getItem('token'); 
+            
+            try {
+                const response = await fetch('https://restauranteapi.integrador.xyz/api/Pedidos', {
+                    method: 'GET',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'x-access-token': token 
+                    }
                 });
+
+                if (!response.ok) {
+                    throw new Error(`¡Error HTTP! estado: ${response.status}`);
+                }
+
+                const data = await response.json();
+                const mesasOcupadas = data.filter(pedido => pedido.IDMesa !== null).map(pedido => pedido.IDMesa);
+                setMesasOcupadas(mesasOcupadas);
+            } catch (error) {
+                console.error('Error al obtener los pedidos:', error);
+              
             }
-        });
+        };
+
+        fetchMesasOcupadas();
+    }, []);
+
+    const handlerClick = (id) => {
+        if (mesasOcupadas.includes(id)) {
+            Swal.fire({
+                title: `Mesa ${id} está ocupada`,
+                text: "La mesa que seleccionaste ya está siendo utilizada.",
+                icon: "error",
+                confirmButtonText: "Aceptar",
+                confirmButtonColor: '#66FF66'
+            }).then(() => {
+                navigate('/pedido');
+            });
+        } else {
+            Swal.fire({
+                title: `Mesa ${id}`,
+                text: "¿Estás seguro de seleccionar esta mesa?",
+                showCancelButton: true,
+                confirmButtonText: "Sí",
+                cancelButtonText: "No",
+                preConfirm: () => {
+                    return new Promise((resolve) => {
+                        navigate(`/AgregarPedido`, { state: { id } });
+                        resolve();
+                    });
+                }
+            });
+        }
     };
 
     return (

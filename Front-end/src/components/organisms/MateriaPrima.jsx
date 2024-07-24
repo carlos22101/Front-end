@@ -10,7 +10,13 @@ function MateriaPrima() {
   const [filteredItems, setFilteredItems] = useState([]);
 
   useEffect(() => {
-    fetch('https://restauranteapi.integrador.xyz/api/Materia_Prima')
+    const token = sessionStorage.getItem('token');
+    fetch('https://restauranteapi.integrador.xyz/api/Materia_Prima',{
+      headers: {
+        'Content-Type': 'application/json',
+        'x-access-token': token 
+      }
+    })
       .then(response => response.json())
       .then(data => {
         setItems(data);

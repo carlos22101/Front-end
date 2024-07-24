@@ -6,7 +6,13 @@ function CardSelectPlatillo() {
   const [cantidad, setCantidad] = useState({});
 
   useEffect(() => {
-    fetch('https://restauranteapi.integrador.xyz/api/Platillos')
+    const token = sessionStorage.getItem('token');
+    fetch('https://restauranteapi.integrador.xyz/api/Platillos',{
+      headers: {
+        'Content-Type': 'application/json',
+        'x-access-token': token 
+      }
+    })
       .then(response => response.json())
       .then(data => {
         setPlatillos(data);
