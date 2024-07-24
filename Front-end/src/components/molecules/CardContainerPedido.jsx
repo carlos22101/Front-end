@@ -69,52 +69,66 @@ function CardContainerPedido({idpedido, IDMesa, Total, StatusPedido, onDelete, o
         });
       };
 
-    const handleSould = () => {
-      const token = sessionStorage.getItem('token');
-      StatusPedido=true;
-      fetch(`https://restauranteapi.integrador.xyz/api/Pedidos/${idpedido}`, {
-        method: 'PUT',
-        headers: {
-          'Content-Type': 'application/json',
-          'x-access-token': token 
-        },
-        body: JSON.stringify({
-          IDMesa,
-          Total,
-          StatusPedido,
-        }),
-      })
-        .then(response => {
-          if (response.ok) {
+      const handlerVenta = () => {
+        const token = sessionStorage.getItem('token');
+        const StatusPedido = true;
+      
+        fetch(`https://restauranteapi.integrador.xyz/api/Pedidos/${idpedido}`, {
+          method: 'PUT',
+          headers: {
+            'Content-Type': 'application/json',
+            'x-access-token': token 
+          },
+          body: JSON.stringify({
+            IDMesa,
+            Total,
+            StatusPedido,
+          }),
+        })
+          .then(response => {
+            if (!response.ok) {
+              throw new Error('No se pudo actualizar el pedido');
+            }
+            return fetch('https://restauranteapi.integrador.xyz/api/Ventas/procesarPedido', {
+              method: 'POST',
+              headers: {
+                'Content-Type': 'application/json',
+                'x-access-token': token
+              },
+              body: JSON.stringify({
+                pedidoID: idpedido,
+              }),
+            });
+          })
+          .then(response => {
+            if (!response.ok) {
+              throw new Error('No se pudo procesar el pedido');
+            }
+            return response.json(); // Procesa la respuesta como JSON si es necesario
+          })
+          .then(data => {
+            // Mostrar mensaje de éxito y realizar acciones adicionales
             Swal.fire({
               title: '¡Éxito!',
-              text: 'Pedido actualizado correctamente',
+              text: 'Pedido actualizado y procesado correctamente',
               icon: 'success',
               confirmButtonText: 'Aceptar',
               confirmButtonColor: '#66FF66',
             }).then(() => {
               onUpdate();
             });
-          } else {
+          })
+          .catch(error => {
             Swal.fire({
               title: 'Error',
-              text: 'No se pudo actualizar el Pedido',
+              text: error.message,
               icon: 'error',
               confirmButtonText: 'Aceptar',
               confirmButtonColor: '#FF0000',
             });
-          }
-        })
-        .catch(error => {
-          Swal.fire({
-            title: 'Error',
-            text: 'Error en la solicitud',
-            icon: 'error',
-            confirmButtonText: 'Aceptar',
-            confirmButtonColor: '#FF0000',
           });
-        });
-    }
+      };
+      
     
     const handleUpdate = () => {
         navigate(`/Actualizar/${idpedido}`, { state: { StatusPedido } });
@@ -131,7 +145,7 @@ function CardContainerPedido({idpedido, IDMesa, Total, StatusPedido, onDelete, o
           <div className='rounded-lg absolute right-9 top-1 translate-x-4 bg-white flex flex-col w-20'>
             <Button Style={'bg-[#ff0000]'} onClick={handleDelete}>Eliminar</Button>
             <Button Style={'bg-[#66FF66]'} onClick={handleUpdate}>Actualizar</Button>
-            <Button Style={'bg-[#f7ff02]'} onClick={handleSould}>Vendido</Button>
+            <Button Style={'bg-[#f7ff02]'} onClick={handlerVenta}>Vendido</Button>
           </div>
         )}
       </div>
