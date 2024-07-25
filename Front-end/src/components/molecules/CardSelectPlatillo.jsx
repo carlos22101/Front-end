@@ -42,8 +42,10 @@ function CardSelectPlatillo() {
       } else if (operacion === '0' && nuevaCantidad[id] > 0) {
         nuevaCantidad[id] -= 1;
       }
+      console.log(cantidad);
       return nuevaCantidad;
     });
+    
   };
 
   return (
@@ -84,6 +86,17 @@ function CardSelectPlatillo() {
           </div>
         </div>
       ))}
+      <button onClick={()=>{
+        let a = Object.keys(cantidad)
+        let b = Object.values(cantidad)
+        let c = []
+        console.log(JSON.stringify(a));
+        console.log(JSON.stringify(b));
+        a.forEach((item,index) => {
+          c.push({"id":item, "c": b[index] })
+        })
+        console.log(c);
+      }}>Mostrar</button>
     </div>
   );
 }
