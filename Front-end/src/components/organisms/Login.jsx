@@ -2,10 +2,11 @@ import React from 'react';
 import Form from '../molecules/Form';
 import Swal from 'sweetalert2';
 import { useNavigate } from 'react-router-dom';
-
+import UserContext from '../../context/userContext';
+import { useContext } from 'react';
 const Login = () => {
   const navigate = useNavigate();
-
+  const value = useContext(UserContext)
   const handleSubmit = ({ username, password }) => {
     const url = 'https://restauranteapi.integrador.xyz/api/auth/Login';
     console.log('Fetching URL:', url);
@@ -29,11 +30,12 @@ const Login = () => {
     .then(body => {
       console.log('Cuerpo de la respuesta:', body);
       const { token } = body;
-
+      value.setUser({"name": body.username})
       if (token) {
         sessionStorage.setItem('token', token); 
         Swal.fire('¡Éxito!', 'Has iniciado sesión correctamente', 'success')
         .then(() => {
+          
           navigate('/Home');
         });
       } else {
