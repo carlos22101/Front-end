@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+/*import React, { useState, useEffect } from 'react';
 
 function CardSelectPlatillo() {
   const [platillos, setPlatillos] = useState([]);
@@ -100,4 +100,4 @@ function CardSelectPlatillo() {
     </div>
   );
 }
-export default CardSelectPlatillo;
+export default CardSelectPlatillo;*/

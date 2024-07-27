@@ -22,7 +22,7 @@ function CardSelecPedido() {
 
     useEffect(() => {
         const fetchMesasOcupadas = async () => {
-            const token = sessionStorage.getItem('token'); 
+            const token = sessionStorage.getItem('token');
             
             try {
                 const response = await fetch('https://restauranteapi.integrador.xyz/api/Pedidos', {
@@ -42,14 +42,13 @@ function CardSelecPedido() {
                 setMesasOcupadas(mesasOcupadas);
             } catch (error) {
                 console.error('Error al obtener los pedidos:', error);
-              
             }
         };
 
         fetchMesasOcupadas();
     }, []);
 
-    const handlerClick = (id) => {
+    const handlerClick = async (id) => {
         if (mesasOcupadas.includes(id)) {
             Swal.fire({
                 title: `Mesa ${id} está ocupada`,
@@ -61,16 +60,64 @@ function CardSelecPedido() {
                 navigate('/pedido');
             });
         } else {
-            Swal.fire({
+            const confirm = await Swal.fire({
                 title: `Mesa ${id}`,
                 text: "¿Estás seguro de seleccionar esta mesa?",
                 showCancelButton: true,
                 confirmButtonText: "Sí",
                 cancelButtonText: "No",
                 preConfirm: () => {
-                    return new Promise((resolve) => {
-                        navigate(`/AgregarPedido`, { state: { id } });
-                        resolve();
+                    return new Promise(async (resolve) => {
+                        const token = sessionStorage.getItem('token');
+                        try {
+                            const response = await fetch('https://restauranteapi.integrador.xyz/api/Pedidos', {
+                                method: 'POST',
+                                headers: {
+                                    'Content-Type': 'application/json',
+                                    'x-access-token': token,
+                                },
+                                body: JSON.stringify({
+                                    IDMesa: id,
+                                    Total: 0,  // Puedes cambiar esto según sea necesario
+                                    StatusPedido: false  // Cambiar según sea necesario
+                                }),
+                            });
+
+                            if (response.ok) {
+                                const data = await response.json();
+                                console.log('Pedido agregado:', data);
+                                Swal.fire({
+                                    title: '¡Éxito!',
+                                    text: 'Pedido agregado correctamente',
+                                    icon: 'success',
+                                    confirmButtonText: 'Aceptar',
+                                    confirmButtonColor: '#10B981',
+                                }).then(() => {
+                                    navigate(`/AgregarPedido`, { state: { id } });
+                                    resolve();
+                                });
+                            } else {
+                                console.error('Error al agregar el pedido:', response.status);
+                                Swal.fire({
+                                    title: 'Error',
+                                    text: 'No se pudo agregar el pedido',
+                                    icon: 'error',
+                                    confirmButtonText: 'Aceptar',
+                                    confirmButtonColor: '#FF0000',
+                                });
+                                resolve();
+                            }
+                        } catch (error) {
+                            console.error('Error en la solicitud:', error);
+                            Swal.fire({
+                                title: 'Error',
+                                text: 'Error en la solicitud',
+                                icon: 'error',
+                                confirmButtonText: 'Aceptar',
+                                confirmButtonColor: '#FF0000',
+                            });
+                            resolve();
+                        }
                     });
                 }
             });
