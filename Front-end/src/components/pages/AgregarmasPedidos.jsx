@@ -3,7 +3,7 @@ import { useNavigate, useLocation } from 'react-router-dom';
 import Swal from 'sweetalert2';
 import Header from '../molecules/Header';
 
-const AgregarPedido = () => {
+const AgregarmasPedidos = () => {
   const navigate = useNavigate();
   const location = useLocation();
   const { id: IDMesa, IDPedido } = location.state || {}; 
@@ -179,4 +179,4 @@ const AgregarPedido = () => {
   );
 };
 
-export default AgregarPedido;
+export default AgregarmasPedidos;

@@ -65,7 +65,9 @@ function CardSelecPedido() {
                 text: "¿Estás seguro de seleccionar esta mesa?",
                 showCancelButton: true,
                 confirmButtonText: "Sí",
+                confirmButtonColor: '#66FF66',
                 cancelButtonText: "No",
+                cancelButtonColor: '#FF0000',
                 preConfirm: () => {
                     return new Promise(async (resolve) => {
                         const token = sessionStorage.getItem('token');
@@ -78,8 +80,8 @@ function CardSelecPedido() {
                                 },
                                 body: JSON.stringify({
                                     IDMesa: id,
-                                    Total: 0,  // Puedes cambiar esto según sea necesario
-                                    StatusPedido: false  // Cambiar según sea necesario
+                                    Total: 0,  
+                                    StatusPedido: false  
                                 }),
                             });
 

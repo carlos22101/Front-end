@@ -18,6 +18,7 @@ import ActualizarProveedor from './components/pages/ActualizarProveedor';
 import CardSelecPedido from './components/molecules/CardSelecPedido';
 import AgregarPedido from './components/pages/AgregarPedido';
 import RouteProtected from './components/pages/RouteProtected';
+import AgregarmasPedidos from './components/pages/AgregarmasPedidos';
 
 
 const App = () => {
@@ -44,6 +45,7 @@ const App = () => {
               <Route path='/actualizar-proveedor/:ID_Proveedor' element={<ActualizarProveedor/>}/>
               <Route path='/SeleccionarPedido' element={<CardSelecPedido/>}/>
               <Route path='/AgregarPedido' element={<AgregarPedido/>}/>
+              <Route path="/agregarmaspedidos" element={<AgregarmasPedidos />} />
             </ Route>
           </Routes>
         
