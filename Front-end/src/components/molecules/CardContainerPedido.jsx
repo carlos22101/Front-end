@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import Swal from 'sweetalert2';
 import { useNavigate } from 'react-router-dom';
 import Button from '../atoms/Button';
-import CardMostarPlatillos from './CardMostarPlatillos';
+import CardMostarPlatillos from './CardMostrarPlatillos';
 
 function CardContainerPedido({idpedido, IDMesa, Total, StatusPedido, onDelete, onUpdate }) {
     const [VerBtns, setVerBtns] = useState(false);
@@ -90,14 +90,14 @@ function CardContainerPedido({idpedido, IDMesa, Total, StatusPedido, onDelete, o
             if (!response.ok) {
               throw new Error('No se pudo actualizar el pedido');
             }
-            return fetch('https://restauranteapi.integrador.xyz/api/Ventas/procesarPedido', {
+            return fetch('https://restauranteapi.integrador.xyz/api/Ventas/finalizarPedido', {
               method: 'POST',
               headers: {
                 'Content-Type': 'application/json',
                 'x-access-token': token
               },
               body: JSON.stringify({
-                pedidoID: idpedido,
+                IDPedido: idpedido,
               }),
             });
           })
@@ -130,15 +130,14 @@ function CardContainerPedido({idpedido, IDMesa, Total, StatusPedido, onDelete, o
           });
       };
       
-    
-    const handleUpdate = () => {
-        navigate(`/Actualizar/${idpedido}`, { state: { StatusPedido } });
-    };
+      const handleUpdate = () => {
+        navigate('/agregarmaspedidos', { state: { id: IDMesa, IDPedido: idpedido } });
+      };
 
   return (
     <>
     <div className="border rounded-lg overflow-hidden shadow-lg m-2 w-[500px]">
-      <div className='pl-56 relative inline-block '>
+      <div className='pl-[460px] relative inline-block '>
         <Button onClick={handlerClick}>
           •••
         </Button>
@@ -153,7 +152,6 @@ function CardContainerPedido({idpedido, IDMesa, Total, StatusPedido, onDelete, o
       <div className="flex flex-col pl-4 pb-4 pr-4 bg-[#cccccc]">
         <div>
           <h3 className="mt-2 mr-2">Mesa:{IDMesa}</h3>
-          <p className="mt-2 mr-2">Total:{Total}</p>
           <p className="mt-2 mr-2">Status:{status}</p>
         </div>
         <CardMostarPlatillos IDMesa={IDMesa}></CardMostarPlatillos>
