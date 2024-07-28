@@ -13,7 +13,7 @@ return(
                 <Link to="/MateriaPrima">Materia Prima</Link>
             </li>
             <li className='mb-4'>
-                <Link to="/Usuario">Usuarios</Link>
+                <Link to="/Usuario">Perfil</Link>
             </li>
             <li className='mb-4'>
                 <Link to="/Proveedores">Proveedores</Link>

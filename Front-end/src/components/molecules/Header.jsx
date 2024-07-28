@@ -20,13 +20,15 @@ function Header() {
       case '/Proveedores':
         return 'Proveedores';
       case '/Pedido':
-        return 'Mesas';
+        return 'Pedido';
       case '/AgregarMateriaPrima':
         return 'Agreagar Materia Prima';
       case '/agregar-proveedor':
         return 'Agregar Proveedor';
       case '/Ventas':
         return 'Ventas';
+        case '/Usuario':
+        return 'Usuario';
       default:
         if (location.pathname.startsWith('/Actualizar/')) {
           return 'Actualizar';

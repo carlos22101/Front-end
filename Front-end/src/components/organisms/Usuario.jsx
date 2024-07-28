@@ -64,13 +64,13 @@ function Usuario() {
     if (formValues) {
       try {
         const token = sessionStorage.getItem('token');
-        const response = await fetch(`https://restauranteapi.integrador.xyz/api/Usuario/${user.id}`, {
+        const response = await fetch("https://restauranteapi.integrador.xyz/api/auth/update-password", {
           method: 'PUT',
           headers: {
             'Content-Type': 'application/json',
             'x-access-token': token
           },
-          body: JSON.stringify({ password: formValues.newPassword }),
+          body: JSON.stringify({ newPassword: formValues.newPassword }),
         });
 
         if (response.ok) {
@@ -89,17 +89,19 @@ function Usuario() {
       <Header />
       <div className="flex">
         <Sidebar />
-        <div className="p-4">
+        <div className="p-4 flex flex-col items-center w-full">
           {loading ? (
-            <p>Cargando...</p>
+            <div className="flex justify-center items-center h-full">
+              <div className="loader ease-linear rounded-full border-4 border-t-4 border-gray-200 h-12 w-12"></div>
+            </div>
           ) : user ? (
-            <>
-              <h1>Bienvenido, {user.username}</h1>
-              <p>ID de usuario: {user.id}</p>
-              <button onClick={handleChangePassword} className="bg-blue-500 text-white px-4 py-2 rounded">
+            <div className="bg-white shadow-md rounded-lg p-6 w-full max-w-md">
+              <h1 className="text-2xl font-bold mb-4">Bienvenido, {user.username}</h1>
+              <p className="text-gray-700 mb-4">ID de usuario: {user.id}</p>
+              <button onClick={handleChangePassword} className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
                 Cambiar contraseña
               </button>
-            </>
+            </div>
           ) : (
             <p>No se encontró el usuario</p>
           )}

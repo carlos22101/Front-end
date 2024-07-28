@@ -16,7 +16,13 @@ const ActualizarProveedor = () => {
 
   useEffect(() => {
     if (ID_Proveedor) {
-      fetch(`https://restauranteapi.integrador.xyz/api/Proveedores/${ID_Proveedor}`)
+      const token = sessionStorage.getItem('token');
+      fetch(`https://restauranteapi.integrador.xyz/api/Proveedores/${ID_Proveedor}`,{
+        headers: {
+        'x-access-token': token, 
+        'Content-Type': 'application/json'
+      }
+      })
         .then((response) => {
           if (!response.ok) {
             throw new Error('Error al obtener el proveedor');
