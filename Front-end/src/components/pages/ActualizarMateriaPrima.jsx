@@ -5,6 +5,7 @@ import CustomText from '../atoms/CustomText';
 import InputM from '../atoms/Input';
 import Button from '../atoms/Button';
 import Swal from 'sweetalert2';
+import { Helmet } from 'react-helmet-async';
 
 function ActualizarMateriaPrima() {
   const { id } = useParams();
@@ -81,6 +82,9 @@ function ActualizarMateriaPrima() {
 
   return (
     <>
+          <Helmet>
+        <title>Actualizar</title>
+      </Helmet>
       <Header />
       <div className="flex flex-col items-center min-h-screen bg-gray-100">
           <form onSubmit={handleSubmit} className="bg-white p-8 rounded shadow-md w-full max-w-4xl mt-5 h-72">

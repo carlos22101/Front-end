@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { useNavigate, useLocation } from 'react-router-dom';
 import Swal from 'sweetalert2';
 import Header from '../molecules/Header';
+import { Helmet } from 'react-helmet-async';
 
 const AgregarmasPedidos = () => {
   const navigate = useNavigate();
@@ -107,6 +108,9 @@ const AgregarmasPedidos = () => {
 
   return (
     <>
+      <Helmet>
+        <title>Agregar</title>
+      </Helmet>
       <Header />
       <div className="flex flex-col items-center justify-center bg-gray-100">
         <div className="bg-white p-8 rounded shadow-md w-full max-w-4xl">
@@ -121,7 +125,7 @@ const AgregarmasPedidos = () => {
                 {Object.keys(clasificados).map(categoria => (
                   <div key={categoria} className="mb-8">
                     <h1 className="text-2xl font-bold mb-4">{categoria}</h1>
-                    <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-4">
+                    <div className="grid md:cols-2 lg:cols-3 gap-4">
                       {clasificados[categoria].map(platillo => (
                         <div key={platillo.IDPlatillo} className="flex border p-4 rounded shadow-md">
                           <h2 className="mt-[10px] text-lg font-bold mr-2">{platillo.Nombre}</h2>

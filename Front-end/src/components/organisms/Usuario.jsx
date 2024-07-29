@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import Sidebar from "../molecules/Sidebar";
 import Header from "../molecules/Header";
 import Swal from "sweetalert2";
+import { Helmet } from 'react-helmet-async';
 
 function Usuario() {
   const [user, setUser] = useState(null);
@@ -86,6 +87,9 @@ function Usuario() {
 
   return (
     <>
+          <Helmet>
+        <title>Perfil</title>
+      </Helmet>
       <Header />
       <div className="flex">
         <Sidebar />

@@ -3,6 +3,7 @@ import Swal from 'sweetalert2';
 import { useParams, useNavigate } from 'react-router-dom';
 import Header from '../molecules/Header';
 import Button from '../atoms/Button';
+import { Helmet } from 'react-helmet-async';
 
 const ActualizarProveedor = () => {
   const navigate = useNavigate();
@@ -104,6 +105,9 @@ const ActualizarProveedor = () => {
 
   return (
     <>
+      <Helmet>
+        <title>Actualizar</title>
+      </Helmet>
       <Header />
       <div className="flex flex-col items-center min-h-screen bg-gray-100">
         <form className="bg-white p-8 rounded shadow-md w-full max-w-4xl mt-5">

@@ -3,6 +3,7 @@ import Header from "../molecules/Header";
 import Sidebar from "../molecules/Sidebar";
 import SearchBarP from "../molecules/SearchBarP";
 import CardContainerP from "../molecules/CardContainerP";
+import { Helmet } from 'react-helmet-async';
 
 function Proveedores() {
   const [searchValue, setSearchValue] = useState("");
@@ -17,6 +18,9 @@ function Proveedores() {
 
   return (
     <>
+    <Helmet>
+        <title>Proveedores</title>
+      </Helmet>
       <Header />
       <div className="flex">
         <Sidebar />

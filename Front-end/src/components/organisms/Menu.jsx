@@ -4,6 +4,7 @@ import Sidebar from '../molecules/Sidebar';
 import Card from '../molecules/Card';
 import SearchBar from '../molecules/SearchBar';
 import CardContainer from '../molecules/CardContainer';
+import { Helmet } from 'react-helmet-async';
 
 const Menu = () => {
   const [platillos, setPlatillos] = useState([]);
@@ -57,6 +58,9 @@ const Menu = () => {
 
   return (
     <>
+          <Helmet>
+        <title>Menú</title>
+      </Helmet>
       <Header />
       <div className="flex">
         <Sidebar />

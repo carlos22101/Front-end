@@ -20,7 +20,6 @@ import AgregarPedido from './components/pages/AgregarPedido';
 import RouteProtected from './components/pages/RouteProtected';
 import AgregarmasPedidos from './components/pages/AgregarmasPedidos';
 
-
 const App = () => {
   const [user, setUser] = useState({})
   return (

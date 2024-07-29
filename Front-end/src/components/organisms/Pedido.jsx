@@ -4,6 +4,7 @@ import ButtonP from "../atoms/ButtonP";
 import { useNavigate } from "react-router-dom";
 import { useEffect, useState } from "react";
 import CardContainerPedido from "../molecules/CardContainerPedido";
+import { Helmet } from 'react-helmet-async';
 
 
 function Pedido(){
@@ -39,6 +40,9 @@ function Pedido(){
 
     return (
         <>
+        <Helmet>
+        <title>Pedidos</title>
+      </Helmet>
         <Header />
         <div className="flex">
             <Sidebar />  

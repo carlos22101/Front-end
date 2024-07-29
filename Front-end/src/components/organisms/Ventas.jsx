@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import Sidebar from "../molecules/Sidebar";
 import Header from "../molecules/Header";
 import CardContainerVentas from '../molecules/CardContainerVentas';
+import { Helmet } from 'react-helmet-async';
 
 function Ventas() {
   const [venta, setVenta] = useState([]);
@@ -23,6 +24,9 @@ function Ventas() {
   
     return (
       <>
+            <Helmet>
+        <title>Ventas</title>
+      </Helmet>
         <Header />
         <div className="flex">
           <Sidebar />

@@ -4,6 +4,7 @@ import Sidebar from '../molecules/Sidebar';
 import SearchBarM from '../molecules/SearchBarM';
 import CardM from '../molecules/CardM';
 import CardContainerM from '../molecules/CardContainerM';
+import { Helmet } from 'react-helmet-async';
 
 function MateriaPrima() {
   const [items, setItems] = useState([]);
@@ -46,6 +47,9 @@ function MateriaPrima() {
 
   return (
     <>
+         <Helmet>
+        <title>Materia Prima</title>
+      </Helmet>
       <Header />
       <div className="flex">
         <Sidebar />

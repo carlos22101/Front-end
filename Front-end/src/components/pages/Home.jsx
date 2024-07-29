@@ -1,9 +1,13 @@
 import Header from "../molecules/Header";
 import Sidebar from "../molecules/Sidebar";
+import { Helmet } from 'react-helmet-async';
 
 function Home() {
   return (
     <>
+    <Helmet>
+        <title>La Tehuanita</title>
+      </Helmet>
       <Header />
       <div className="flex flex-col md:flex-row">
         <Sidebar className="w-full md:w-1/4" />

@@ -3,6 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import Input from '../atoms/Input';
 import Swal from 'sweetalert2';
 import Header from '../molecules/Header';
+import { Helmet } from 'react-helmet-async';
 
 const AgregarPlatillo = () => {
   const [Nombre, setNombre] = useState('');
@@ -87,6 +88,9 @@ const AgregarPlatillo = () => {
 
   return (
     <>
+      <Helmet>
+        <title>Agregar</title>
+      </Helmet>
       <Header />
       <div className="flex flex-col items-center min-h-screen bg-gray-100">
         <form onSubmit={handleSubmit} className="bg-white p-8 rounded shadow-md w-full max-w-4xl mt-2">

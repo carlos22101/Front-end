@@ -4,6 +4,7 @@ import Swal from 'sweetalert2';
 import InputP from '../atoms/InputP';
 import ButtonP from '../atoms/ButtonP';
 import Header from '../molecules/Header';
+import { Helmet } from 'react-helmet-async';
 
 const AgregarProveedor = () => {
   const [nombre, setNombre] = useState('');
@@ -51,6 +52,9 @@ const AgregarProveedor = () => {
 
   return (
     <>
+      <Helmet>
+        <title>Agregar</title>
+      </Helmet>
       <Header />
       <div className="flex flex-col items-center min-h-screen bg-gray-100">
         <form onSubmit={handleSubmit} className="bg-white p-8 rounded shadow-md w-full max-w-4xl mt-5">

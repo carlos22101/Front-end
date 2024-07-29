@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { useNavigate, useLocation } from 'react-router-dom';
 import Swal from 'sweetalert2';
 import Header from '../molecules/Header';
+import { Helmet } from 'react-helmet-async';
 
 const AgregarPedido = () => {
   const navigate = useNavigate();
@@ -107,6 +108,9 @@ const AgregarPedido = () => {
 
   return (
     <>
+          <Helmet>
+        <title>Agregar</title>
+      </Helmet>
       <Header />
       <div className="flex flex-col items-center justify-center bg-gray-100">
         <div className="bg-white p-8 rounded shadow-md w-full max-w-4xl">
