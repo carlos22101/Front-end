@@ -13,6 +13,16 @@ const ActualizarProveedor = () => {
     Contacto: '',
     Informacion: ''
   });
+  if (!Nombre || !Contacto || !Informacion) {
+    Swal.fire({
+      title: 'Error',
+      text: 'Por favor, llene todos los campos',
+      icon: 'error',
+      confirmButtonText: 'Aceptar',
+      confirmButtonColor: '#FF0000',
+    });
+    return;
+  }
 
   useEffect(() => {
     if (ID_Proveedor) {

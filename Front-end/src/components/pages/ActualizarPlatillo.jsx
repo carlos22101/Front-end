@@ -16,6 +16,7 @@ const ActualizarPlatillo = () => {
 
   useEffect(() => {
     const token = sessionStorage.getItem('token'); 
+    
   
     fetch(`https://restauranteapi.integrador.xyz/api/Platillos/${id}`, {
       headers: {

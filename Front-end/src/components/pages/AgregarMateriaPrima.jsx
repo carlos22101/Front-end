@@ -14,6 +14,28 @@ function AgregarMateriaPrima() {
   const handleSubmit = async (event) => {
     event.preventDefault();
 
+    if (!nombre || !cantidad) {
+      Swal.fire({
+        title: 'Error',
+        text: 'Por favor, llene todos los campos',
+        icon: 'error',
+        confirmButtonText: 'Aceptar',
+        confirmButtonColor: '#FF0000',
+      });
+      return;
+    }
+    
+    if (parseFloat(cantidad) <= 0) {
+      Swal.fire({
+        title: 'Error',
+        text: 'El precio debe ser mayor a 0',
+        icon: 'error',
+        confirmButtonText: 'Aceptar',
+        confirmButtonColor: '#FF0000',
+      });
+      return;
+    }
+
     try {
       const token = sessionStorage.getItem('token');
       const response = await fetch('https://restauranteapi.integrador.xyz/api/Materia_Prima', {

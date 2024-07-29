@@ -29,8 +29,20 @@ function ActualizarMateriaPrima() {
   }, [id]);
 
   const handleSubmit = (event) => {
-    const token = sessionStorage.getItem('token');
     event.preventDefault();
+
+    if (parseInt(cantidad, 10) <= 0) {
+      Swal.fire({
+        title: 'Error',
+        text: 'La cantidad debe ser mayor a 0',
+        icon: 'error',
+        confirmButtonText: 'Aceptar',
+        confirmButtonColor: '#FF0000',
+      });
+      return;
+    }
+
+    const token = sessionStorage.getItem('token');
     fetch(`https://restauranteapi.integrador.xyz/api/Materia_Prima/${id}`, {
       method: 'PUT',
       headers: {

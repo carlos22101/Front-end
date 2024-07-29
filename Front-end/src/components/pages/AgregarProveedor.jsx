@@ -9,10 +9,16 @@ const AgregarProveedor = () => {
   const [nombre, setNombre] = useState('');
   const [contacto, setContacto] = useState('');
   const [informacion, setInformacion] = useState('');
+  const [error, setError] = useState('');
   const navigate = useNavigate();
 
   const handleSubmit = (e) => {
     e.preventDefault();
+
+    if (!/^\d{10}$/.test(contacto)) {
+      setError('El contacto debe ser un número de 10 dígitos');
+      return;
+    }
 
     const nuevoProveedor = { Nombre: nombre, Contacto: contacto, Informacion: informacion };
     const token = sessionStorage.getItem('token');
@@ -62,11 +68,15 @@ const AgregarProveedor = () => {
             <label className="block font-medium text-gray-700 mt-5">Contacto:</label>
             <InputP
               value={contacto}
-              onChange={(e) => setContacto(e.target.value)}
+              onChange={(e) => {
+                setContacto(e.target.value);
+                setError(''); // Clear error on change
+              }}
               placeholder="Contacto"
               className="mt-1 block w-full border border-gray-300 rounded-md p-2"
               required
             />
+            {error && <p className="text-red-500 text-sm mt-1">{error}</p>}
           </div>
           <div>
             <label className="block font-medium text-gray-700 mt-5">Informacion:</label>

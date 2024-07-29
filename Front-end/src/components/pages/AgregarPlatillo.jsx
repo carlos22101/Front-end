@@ -24,6 +24,16 @@ const AgregarPlatillo = () => {
       });
       return;
     }
+    if (parseFloat(Precio) <= 0) {
+      Swal.fire({
+        title: 'Error',
+        text: 'El precio debe ser mayor a 0',
+        icon: 'error',
+        confirmButtonText: 'Aceptar',
+        confirmButtonColor: '#FF0000',
+      });
+      return;
+    }
 
     try {
       const token = sessionStorage.getItem('token');
