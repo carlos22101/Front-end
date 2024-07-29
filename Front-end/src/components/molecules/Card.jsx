@@ -23,8 +23,13 @@ const Card = ({ id, nombre, descripcion, precio, Categoria, onDelete }) => {
       cancelButtonText: 'No, cancelar',
     }).then((result) => {
       if (result.isConfirmed) {
+        const token = sessionStorage.getItem('token');
         fetch(`https://restauranteapi.integrador.xyz/api/Platillos/${id}`, {
           method: 'DELETE',
+          headers: {
+            'Content-Type': 'application/json',
+            'x-access-token': token,
+          }
         })
           .then(response => {
             if (response.ok) {
